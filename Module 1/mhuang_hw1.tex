@@ -24,8 +24,18 @@
 
 \section*{1.17}
 
-A company knows that it is due to receive a certain amount of a foreign currency in four months. What type of option contract is appropriate for hedging?
+A company knows that it is due to receive a certain amount of a foreign currency in four months. What type of option contract is appropriate for hedging? \\ \\ 
 
+\begin{itemize}
+
+  \item A \textbf{put} gives its long the \emph{right to sell} the underlying at a fixed strike.
+
+  \item A \textbf{call} gives its long the \emph{right to buy} at a fixed strike.
+
+\end{itemize}
+
+The company will be \emph{selling} the foreign currency for home currency when it arrives. To protect against the FC weakening while keeping the upside if the FC strengthens, the company wants the \emph{right} (not the obligation) to sell FC at a guaranteed minimum exchange rate. \\ \\ \\
+The put option contract is most appropriate for hedging (strike expressed as units of home currency per unit of FC), expiring around the expected receipt date. The put establishes a floor on the realized exchange rate; if FC rallies, let the option expire and sell at the (better) spot rate. This trades a premium today for asymmetric upside, exactly the trade-off highlighted in M1A slide 1.12.
 
 
 }
@@ -33,13 +43,17 @@ A company knows that it is due to receive a certain amount of a foreign currency
 
 \section*{1.18}
 
-A US company expects to have to pay 1 million Canadian dollars in six months. Explain how the exchange rate risk can be hedged using (a) a forward contract and (b) an option.
+A US company expects to have to pay 1 million Canadian dollars in six months. Explain how the exchange rate risk can be hedged using (a) a forward contract and (b) an option. \\ \\
+asdf
+
 }
 {\Large 
 
 \section*{1.22}
 
 Describe the profit from the following portfolio: a long forward contract on an asset and a long European put option on the asset with the same maturity as the forward contract and a strike price that is equal to the forward price of the asset at the time the portfolio is set up.
+
+
 
 }
 {\Large 
@@ -52,6 +66,8 @@ bond is
   1,000 - \max(0, 1000(\frac{169}{S_T} - 1))
 \]
 When the exchange rate is below 84.5, nothing is received by the holder at maturity. Show that this ICON is a combination of a regular bond and two options.
+
+
 
 }
 {\Large 
@@ -70,12 +86,7 @@ exchange rate.” How could you use options to satisfy the treasurer?
 
 \section*{1.40}
 
-Describe how foreign currency options can be used for hedging in the situation considered in Section
-1.7 so that (a) ImportCo is guaranteed that its exchange rate will be less than 1.5700, and (b)
-ExportCo is guaranteed that its exchange rate will be at least 1.5300. Use DerivaGem to calculate the
-cost of setting up the hedge in each case assuming that the exchange rate volatility is 12%, interest
-rates in the United States are 5% and interest rates in Britain are 5.7%. Assume that the current
-exchange rate is the average of the bid and offer in Table 1.1.
+Describe how foreign currency options can be used for hedging in the situation considered in Section 1.7 so that (a) ImportCo is guaranteed that its exchange rate will be less than 1.5700, and (b) ExportCo is guaranteed that its exchange rate will be at least 1.5300. Use DerivaGem to calculate the cost of setting up the hedge in each case assuming that the exchange rate volatility is 12\%, interest rates in the United States are 5\% and interest rates in Britain are 5.7\%. Assume that the current exchange rate is the average of the bid and offer in Table 1.1.
 
 
 
@@ -84,10 +95,7 @@ exchange rate is the average of the bid and offer in Table 1.1.
 
 \section*{2.15}
 
-At the end of one day a clearing house member is long 100 contracts, and the settlement price is
-\$50,000 per contract. The original margin is \$2,000 per contract. On the following day the member
-becomes responsible for clearing an additional 20 long contracts, entered into at a price of \$51,000
-per contract. The settlement price at the end of this day is \$50,200. How much does the member have to add to its margin account with the exchange clearing house?
+At the end of one day a clearing house member is long 100 contracts, and the settlement price is \$50,000 per contract. The original margin is \$2,000 per contract. On the following day the member becomes responsible for clearing an additional 20 long contracts, entered into at a price of \$51,000 per contract. The settlement price at the end of this day is \$50,200. How much does the member have to add to its margin account with the exchange clearing house?
 
 
 
@@ -96,8 +104,7 @@ per contract. The settlement price at the end of this day is \$50,200. How much 
 
 \section*{2.21}
 
-What do you think would happen if an exchange started trading a contract in which the quality of the
-underlying asset was incompletely specified?
+What do you think would happen if an exchange started trading a contract in which the quality of the underlying asset was incompletely specified?
 
 
 
@@ -106,8 +113,7 @@ underlying asset was incompletely specified?
 
 \section*{2.22}
 
-“When a futures contract is traded on the floor of the exchange, it may be the case that the open
-interest increases by one, stays the same, or decreases by one.” Explain this statement.
+“When a futures contract is traded on the floor of the exchange, it may be the case that the open interest increases by one, stays the same, or decreases by one.” Explain this statement.
 
 
 
@@ -116,12 +122,7 @@ interest increases by one, stays the same, or decreases by one.” Explain this 
 
 \section*{2.28}
 
-Explain what is meant by open interest. Why does the open interest usually decline during the month
-preceding the delivery month? On a particular day, there were 2,000 trades in a particular futures
-contract. This means that there were 2000 buyers (going long) and 2000 sellers (going short). Of the
-2,000 buyers, 1,400 were closing out positions and 600 were entering into new positions. Of the 2,000
-sellers, 1,200 were closing out positions and 800 were entering into new positions. What is the impact
-of the day's trading on open interest?
+Explain what is meant by open interest. Why does the open interest usually decline during the month preceding the delivery month? On a particular day, there were 2,000 trades in a particular futures contract. This means that there were 2000 buyers (going long) and 2000 sellers (going short). Of the 2,000 buyers, 1,400 were closing out positions and 600 were entering into new positions. Of the 2,000 sellers, 1,200 were closing out positions and 800 were entering into new positions. What is the impact of the day's trading on open interest?
 
 
 
