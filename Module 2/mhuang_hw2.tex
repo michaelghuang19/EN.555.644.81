@@ -32,80 +32,146 @@ As the formula implies that \(h = \rho \frac{\sigma_s}{\sigma_F}\), we look for 
 
 \section*{3.4}
 
-A company has a \$20 million portfolio with a beta of 1.2. It would like to use futures contracts
-on a stock index to hedge its risk. The index futures is currently standing at 1080, and each
-contract is for delivery of \$250 times the index. What is the hedge that minimizes risk? What
-should the company do if it wants to reduce the beta of the portfolio to 0.6?
-
+A company has a \$20 million portfolio with a beta of 1.2. It would like to use futures contracts on a stock index to hedge its risk. The index futures is currently standing at 1080, and each contract is for delivery of \$250 times the index. What is the hedge that minimizes risk? What should the company do if it wants to reduce the beta of the portfolio to 0.6? \\ \\
+We use the formula for hedging an equity portfolio using index futures:
+\[
+  N^* = \beta \frac{V_A}{V_F}
+\]
+\[
+  = 1.2 \cdot \frac{\text{\$20,000,000}}{1080 \cdot \text{\$250}}
+\]
+\[
+  = 1.2 \cdot \frac{\text{\$20,000,000}}{\text{\$270,000}}
+\]
+\[
+  N^* = 1.2 \cdot 74.0740740741 = \sim 88.89
+\]
+As we need a whole number, this indicates that we should \textbf{short 89 futures contracts on the index.} \\ \\
+To reduce the beta of the portfolio to 0.6, we would instead short \((1.2 - 0.6) \cdot 74.0740740741 = 0.6 \cdot 74.0740740741 = \sim 44.44 \), which indicates that we should \textbf{short 44 futures contracts on the index.}
 
 }
 {\Large 
 
 \section*{3.7}
 
-Explain why a short hedger's position improves when the basis strengthens unexpectedly and
-worsens when the basis weakens unexpectedly.
-
+Explain why a short hedger's position improves when the basis strengthens unexpectedly and worsens when the basis weakens unexpectedly. \\ \\
+A short hedger's position improves when the basis strengthens unexpectedly because an increased basis means that the difference between the spot and future price is increasing. As a short hedger is always long the actual asset, the increased difference indicates having a better position and increased value. In addition, this also indicates lower future price, whether that is relative to the spot price or outright, which means it is relatively cheap to buy the assets to close out the short. \\
+Similarly, as the basis weakens, a short hedger will have assets with less value and find it more expensive to close out the short, which hurts both components of the basis. 
 
 }
 {\Large 
 
 \section*{3.14}
 
-A corn farmer argues “I do not use futures contracts for hedging. My real risk is not the price of
-corn. It is that my whole crop gets wiped out by the weather.”Discuss this viewpoint. Should the
-farmer estimate his or her expected production of corn and hedge to try to lock in a price for
-expected production?
-
+A corn farmer argues “I do not use futures contracts for hedging. My real risk is not the price of corn. It is that my whole crop gets wiped out by the weather.”Discuss this viewpoint. Should the farmer estimate his or her expected production of corn and hedge to try to lock in a price for expected production? \\ \\
+With significant variance around the expected production of corn, the farmer is right to argue against using futures contracts for hedging against a worse price of corn. Intuitively, this makes sense, since weather affects all farmers in a similar manner, with very high price elasticity as a result of weather conditions. With poor weather, for example, lower production is likely not unique to just this particular farmer, and higher corn prices would be doubly bad for the farmer, as their lower harvest leads to lower ability or complete inability to sell their crop while a short futures position would also cause losses. This could make sense in other examples, such as the gold example, where this is unlikely to happen, but with this kind of example, it is reasonable to question whether this kind of futures hedging makes sense. 
 
 }
 {\Large 
 
 \section*{3.15}
 
-On July 1, an investor holds 50,000 shares of a certain stock. The market price is \$30 per share.
-The investor is interested in hedging against movements in the market over the next month and
-decides to use the September Mini S\&P 500 futures contract. The index is currently 1,500 and
-one contract is for delivery of \$50 times the index. The beta of the stock is 1.3. What strategy
-should the investor follow? Under what circumstances will it be profitable?
-
+On July 1, an investor holds 50,000 shares of a certain stock. The market price is \$30 per share. The investor is interested in hedging against movements in the market over the next month and decides to use the September Mini S\&P 500 futures contract. The index is currently 1,500 and one contract is for delivery of \$50 times the index. The beta of the stock is 1.3. What strategy should the investor follow? Under what circumstances will it be profitable? \\ \\
+We solve for the number of contracts to short in order to hedge their equity position: 
+\[
+  N^* = \beta \frac{V_A}{V_F}
+\]
+\[
+  = 1.3 \cdot \frac{\$30 \cdot \text{50,000}}{\text{1,500} \cdot \$50}
+\]
+\[
+  = 1.3 \cdot \frac{\text{\$1,500,000}}{\text{\$75,000}}
+\]
+\[
+  = 1.3 \cdot \frac{\text{\$1,500,000}}{\text{\$75,000}}
+\]
+\[
+  = 1.3 \cdot 20 = 26
+\]
+which indicates that the investor should \textbf{26 Mini S\&P 500 futures contracts}. \\ \\
+In terms of profitability -- intuitively, we can break down the hedged return as the return of the stock subtracted by the product of the beta multiplied by the return of the market. We can intuitively see that as long as \textbf{the beta-adjusted return of the market is lower than the return of the stock itself}, then the strategy is profitable. In broad terms, the stock needs to beat the market.
 
 }
 {\Large 
 
 \section*{3.XX}
 
-A futures contract is used for hedging. Explain why the daily settlement of the contract can give
-rise to cash flow problems.
-
+A futures contract is used for hedging. Explain why the daily settlement of the contract can give rise to cash flow problems. \\ \\
+The daily settlement of a futures contract can theoretically give rise to cash flow problems since daily gains and losses are accounted for in a margin account, so the hedger needs to be careful about their hedging positions and also ensure that they are not overleveraged. With volatility, even reasonable futures contracts used for hedging can lead to cash flow problems since asset prices may fluctuate wildly and potentially incredible gains due to assets may only be realized much later, which means that it can be difficult to offset short-term daily futures losses that require additional deposits into the margin account.
 
 }
 {\Large 
 
 \section*{3.18}
 
-Suppose the one-year gold lease rate is 1.5% and the one-year risk-free rate is 5.0%. Both rates
-are compounded annually. Use discussion in Business Snapshot 3.1 to calculate the maximum
-one-year forward price Goldman Sachs should quote for gold when the spot price is \$1,200.
-
+Suppose the one-year gold lease rate is 1.5\% and the one-year risk-free rate is 5.0\%. Both rates are compounded annually. Use discussion in Business Snapshot 3.1 to calculate the maximum one-year forward price Goldman Sachs should quote for gold when the spot price is \$1,200. \\ \\
+As discussed in the snapshots, the steps are as follows: \\ 
+- Goldman borrows the gold from a cetnral bank, paying the lease rate \\
+- Sell the borrowed gold immediately in the spot market \\
+- Invest the proceeds at the risk-free rate \\ 
+- At maturity, repay the gold loan \\
+The maximum forward price is the value at which Goldman breaks even, considering the borrowed ounces and lease cost relative to the risk-free rate, which we can find to be 
+\[
+  \text{\$1,200} \cdot \frac{ 1 + 0.05}{1 + 0.015}
+\]
+\[
+  \text{\$1,200} \cdot 1.03448275862
+\]
+\[
+  = \sim \textbf{\$1241.38}
+\]
 
 }
 {\Large 
 
 \section*{3.XX}
 
-It is now October 2017. A company anticipates that it will purchase 1 million pounds of copper
-in each of February 2018, August 2018, February 2019, and August 2019. The company has
-decided to use the futures contracts traded by the CME Group to hedge its risk. One contract is
-for the delivery of 25,000 pounds of copper. The initial margin is \$2,000 per contract and the
-maintenance margin is \$1,500 per contract. The company's policy is to hedge 80\% of its
-exposure. Contracts with maturities up to 13 months into the future are considered to have
-sufficient liquidity to meet the company's needs. Devise a hedging strategy for the company. (Do
-not make the “tailing” adjustment described in Section 3.4.)
-Assume the market prices (in cents per pound) today and at future dates are as follows. \\ \\
-What is the impact of the strategy you propose on the price the company pays for copper? What
-is the initial margin requirement in October 2017? Is the company subject to any margin calls? \\ \\
-
+It is now October 2017. A company anticipates that it will purchase 1 million pounds of copper in each of February 2018, August 2018, February 2019, and August 2019. The company has decided to use the futures contracts traded by the CME Group to hedge its risk. One contract is for the delivery of 25,000 pounds of copper. The initial margin is \$2,000 per contract and the maintenance margin is \$1,500 per contract. The company's policy is to hedge 80\% of its exposure. Contracts with maturities up to 13 months into the future are considered to have
+sufficient liquidity to meet the company's needs. Devise a hedging strategy for the company. (Do not make the “tailing” adjustment described in Section 3.4.)
+Assume the market prices (in cents per pound) today and at future dates are as follows. 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{3_xx_table.png}
+\end{figure} \\
+What is the impact of the strategy you propose on the price the company pays for copper? What is the initial margin requirement in October 2017? Is the company subject to any margin calls? \\ \\
+An appropriate strategy for this situation of the comopany knowing it will purchase an asset in the future is a long hedge. To size this:
+\[
+  N^* = \frac{h^* Q_A}{Q_F}
+\]
+\[
+  = \frac{0.8 \cdot \text{1,000,000}}{\text{25,000}}
+\]
+\[
+  = \frac{\text{800,000}}{\text{25,000}} = 32
+\]
+As we can only consider contracts with maturities up to 13 months into the future, let's consider which contracts are available, using the stack and roll hedge method as described in the textbook. We therefore hedge accordingly for each purchase: \\
+- February 2018: Hedge with March 2018 contracts \\
+- August 2018: Hedge with September 2018 contracts \\
+- February 2019: Further than 13 months in the future from the perspective of October 2017, so also start with September 2018 contracts, then roll forward to March 2019 when available \\
+- August 2019: Same as above, so also stack September 2018 contracts, then roll forward to September 2019 when available \\ \\
+We therefore start with \(32 \cdot 4 = 128\) contracts, which means we have an \textbf{initial margin requirement of \$256,000} since we have an initial margin of \$2,000 per contract. \\ \\
+We initally have 32 March 2018 contracts at 372.30 and 96 September 2018 contracts at 372.80. We go step by step: \\
+- February 2018: The spot price is 369.00. Close out the March 2018 contracts at the corresponding price of 369.10, with the March 2018 contracts initially priced at 372.30. So the loss is 369.10 - 372.30 = -3.20. The effective price is therefore 
+\[
+  \frac{\text{800,000} \cdot (369.00 + 3.20) + \text{200,000} \cdot 369.00 }{\text{1,000,000}} = 371.56
+\]
+- August 2018: The spot price is 365.00. Close out 32 of the September 2018 contracts at the corresponding price of 364.80, with the September 2018 contracts initially priced at 372.80. The loss is therefore 364.80 - 372.80 = -8.00. The effective price is therefore 
+\[
+  \frac{\text{800,000} \cdot (365.00 + 8.00) + \text{200,000} \cdot 365.00 }{\text{1,000,000}} = 371.40
+\]
+- February 2019: The spot price is 377.00. Close out 32 September 2018 contracts at the corresponding price of 364.80, with the September 2018 contracts initially priced at 372.80. Also close out 32 March 2019 contracts at the corresponding price of 376.70, with them initially priced at 364.30 when we rolled into them during August 2018. The net gains and losses in February 2019 is therefore 364.80 - 372.80 + 376.70 - 364.30 = -8.00 + 12.40 = 4.40. The effective price is therefore 
+\[
+  \frac{\text{800,000} \cdot (377.00 - 4.40) + \text{200,000} \cdot 377.00 }{\text{1,000,000}} = 373.48
+\]
+- August 2019: The spot price is 388.00. Close out 32 September 2018 contracts at the corresponding price of 364.80, with them initially priced at 372.80. Also close out 32 September 2019 contracts at the corresponding price of 388.20, with them initially priced at 364.20 when we initially rolled into them during August 2018. The net gains and losses from August 2019 is therefore 364.80 - 372.80 + 388.20 - 364.20 = -8.00 + 24.00 = 16.00. The effective price is therefore 
+\[
+  \frac{\text{800,000} \cdot (388.00 - 24.00) + \text{200,000} \cdot 388.00 }{\text{1,000,000}} = 375.20
+\]
+Comparing the costs now between unhedged and hedged: \\
+Unhedged: \(\frac{369.00 + 365.00 + 377.00 + 388.00}{4} \cdot \text{4,000,000} = 374.75 \cdot \text{4,000,000}\) = \$14,990,000 \\ 
+Hedged: \(\frac{371.56 + 371.40 + 373.48 + 375.20}{4} \cdot \text{4,000,000} = 372.91 \cdot \text{4,000,000} \) = \$14,916,400 \\
+So the difference here, although on average a few cents, leads to a cost difference of \$14,990,000 - \$14,916,400 = \textbf{\$73,600 cost difference.} \\ \\
+Looking at the maintenance margin -- the difference between the initial and maintenance margin is \$2,000 - \$1,500 = \$500. So we see if we ever dip below this threshold of \$500 per contract, which is equivalent to \(\frac{\text{50,000}}{\text{25,000}} = 2.00\). Looking back at the months with purchases, we see that \textbf{we indeed do trigger margin calls}, that is, we cross this margin of a 2.00 cent loss per contract at both the February 2018 and August 2018 purchases, with losses of 3.20 and 8.00 cent losses accordingly.
 
 }
 
