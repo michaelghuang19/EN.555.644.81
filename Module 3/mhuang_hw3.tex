@@ -107,7 +107,17 @@ which indicates that the rate is about \boxed{\textbf{14.91\%}}.
 \section*{4.11}
 
 Suppose that 6-month, 12-month, 18-month, 24-month, and 30-month zero rates are 4\%, 4.2\%, 4.4\%, 4.6\%, and 4.8\% per annum with continuous compounding respectively. Estimate the cash price of a bond with a face value of 100 that will mature in 30 months and pays a coupon of 4\% per annum semiannually. \\ \\
-
+We need to discount each cash flow at the matching zero rate. We know that the coupon pays \(\frac{0.04 \cdot 100}{2} = \) = \$2 every 6 months, and then 100 + 2 = \$102 at the last payment segment. We therefore would calculate the price like so:
+\[
+  P = 2e^{-0.04(0.5)} + 2e^{-0.042(1.0)} + 2e^{-0.044(1.5)} + 2e^{-0.046(2)} + 102e^{-0.048(2.5)}
+\]
+\[
+  = 1.96039734661 + 1.91773956114 + 1.87226172858 + 1.82421029909 + 90.4658845452
+\]
+\[
+  P = 98.0404934806
+\]
+So the price is approximately \boxed{\textbf{\$98.04}}.
 
 }
 {\Large 
@@ -115,7 +125,35 @@ Suppose that 6-month, 12-month, 18-month, 24-month, and 30-month zero rates are 
 \section*{4.12}
 
 A three-year bond provides a coupon of 8\% semiannually and has a cash price of 104. What is the bond's yield? \\ \\
-
+We know that the coupon pays \(\frac{0.08 \cdot 100}{2} = \) \$4 due to the semiannual payments. Given that the bond itself therefore pays \$4 every 6 months until maturity, at which it pays \$104, we need to therefore solve 
+\[
+  4e^{-0.5y} + 4e^{-y} + 4e^{-1.5y} + 4e^{-2y} + 4e^{-2.5y} + 104e^{-3y} = 104
+\]
+The textbook solves this using trial and error, which I would prefer not to, but let's give it a try:
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+ Guess for \(y\) & Computed price \\ 
+ \hline
+ 0.06 & 105.163180649 \\ 
+ \hline
+ 0.065 & 103.736019541 \\ 
+ \hline
+ 0.0625 & 104.447023845 \\ 
+ \hline
+ 0.0635 & 104.162005945 \\ 
+ \hline
+ 0.064 & 104.019805386 \\ 
+ \hline
+ 0.06425 & 103.948782073 \\ 
+ \hline
+ 0.0641 & 103.991389907 \\
+ \hline
+ 0.06405 & 104.005596621 \\
+ \hline
+\end{tabular}
+\end{center}
+We're extremely close at this point. It seems reasonable enough to say that the rate appears to be very close to 0.06405, or \boxed{\textbf{6.405\%}}.
 
 }
 {\Large 
@@ -166,7 +204,28 @@ We know that the forward rate for the period between \(T_1\) and \(T_2\) implied
 
 A 10-year, 8\% coupon bond currently sells for \$90. A 10-year, 4\% coupon bond currently sells for \$80. What is the 10-year zero rate? (Hint: Consider taking a long position in two of
 the 4\% coupon bonds and a short position in one of the 8\% coupon bonds.) \\ \\
-
+Using the hint, we long two of the 4\% bonds and short one of the 8\% bonds. These balance out, with the coupon payment from the longs being \(\frac{0.04 \cdot 100}{1} = \) \$4 each, so we get \(2 \cdot \) \$4 = \$8. For the short, we pay \(\frac{0.08 \cdot 100}{1} = \) \$8. So the values amounts cancel out to 0 dollars each year from coupons. So looking at the actual cash flows, we only consider the initial bond transactions and the final expiry date. For the initial transaction: 
+\[
+  2 \cdot \text{-\$80} + 1 \cdot \text{\$90} = \text{-\$160 + \$90 = -\$70}
+\]
+And for the expiry date:
+\[
+  2 \cdot \text{\$100} - 1 \cdot \text{\$100} = \text{\$200 - \$100 = \$100}
+\]
+We treat this as a synthetic zero-coupon as the intermediate cash flows are 0, so we can solve the rate as 
+\[
+  70 \cdot e^{10(R_c)} = 100
+\]
+\[
+  e^{10(R_c)} = \frac{10}{7}
+\] 
+\[
+  10(R_c) = \ln(\frac{10}{7})
+\]
+\[
+  R_c = \frac{\ln(\frac{10}{7})}{10} = \frac{0.35667494393}{10} = 0.035667494393
+\]
+So in conclusion the overall rate is approximately \boxed{\textbf{3.57\%}}.
 
 }
 {\Large 
