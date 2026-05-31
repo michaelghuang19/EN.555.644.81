@@ -237,22 +237,75 @@ A five-year bond with a yield of 11\% (continuously compounded) pays an 8\% coup
 \subsection*{a)}
 
 What is the bond's price? \\ \\
-
+We know the coupon payment to be \(\frac{0.08 \cdot 100}{1} = \) \$8. We get the \$100 at the end of the fifth year as well. We therefore can calculate the price as 
+\[
+  8e^{-0.11(1)} + 8e^{-0.11(2)} + 8e^{-0.11(3)} + 8e^{-0.11(4)} + 108e^{-0.11(5)}
+\]
+\[
+  = 8e^{-0.11} + 8e^{-0.22} + 8e^{-0.33} + 8e^{-0.44} + 108e^{-0.55}
+\]
+\[
+  = 7.16667308237 + 6.4201503837 + 5.75138986746 + 5.15229136867 + 62.310579521
+\]
+\[
+  = 86.8010842233
+\]
+So the bond price here would be approximately \boxed{\textbf{\$86.80}}.
 
 \subsection*{b)}
 
 What is the bond's duration? \\ \\
-
+We know the formula for calculating bond duration to be 
+\[
+  D = \frac{\sum_{i=1}^{n} t_i c_i e^{-yt_i}}{B}
+\]
+\[
+  = \frac{1 \cdot 8 \cdot e^{-0.11(1)} + 2 \cdot 8 \cdot e^{-0.11(2)} + 3 \cdot 8 \cdot e^{-0.11(3)} + 4 \cdot 8 \cdot e^{-0.11(4)} + 5 \cdot 108 \cdot e^{-0.11(5)}}{86.8}
+\]
+\[
+  = \frac{8e^{-0.11} + 16e^{-0.22} + 24e^{-0.33} + 32e^{-0.44} + 540e^{-0.55}}{86.8}
+\]
+\[
+  = \frac{7.16667308237 + 12.8403007674 + 17.2541696024 + 20.6091654747 + 311.552897605}{86.8}
+\]
+\[
+  D = \frac{369.423206532}{86.8} = 4.25602772502
+\]
+So the duration is about \boxed{\textbf{4.26 years}}.
 
 \subsection*{c)}
 
-Use the duration to calculate the effect on the bond’s price of a 0.2\% decrease in its yield. \\ \\
-
+Use the duration to calculate the effect on the bond's price of a 0.2\% decrease in its yield. \\ \\
+By definition, we know that 
+\[
+  \Delta B = - B D \Delta y
+\]
+and with \(B = 86.8, D = 4.26, \Delta y = - 0.002\):
+\[
+  \Delta B = - 86.8 \cdot 4.26 \cdot - 0.002
+\]
+\[
+  \Delta B = 0.739536
+\]
+So the price should \boxed{\textbf{increase by approximately \$0.74}} to \$87.54.
 
 \subsection*{d)}
 
 Recalculate the bond's price on the basis of a 10.8\% per annum yield and verify that the result is in agreement with your answer to (c). \\ \\ 
-
+Using 10.8\% instead to calculate the price:
+\[
+  8e^{-0.108(1)} + 8e^{-0.108(2)} + 8e^{-0.108(3)} + 8e^{-0.108(4)} + 108e^{-0.108(5)}
+\]
+\[
+  = 8e^{-0.108} + 8e^{-0.216} + 8e^{-0.324} + 8e^{-0.432} + 108e^{-0.540}
+\]
+\[
+  = 7.18102077144 + 6.44588241499 + 5.78600193904 + 5.19367501348 + 62.9368112564
+\]
+\[
+  = 87.5433913953
+\]
+Which is approximately \$87.54, which is indeed \boxed{\textbf{in agreement with our answer in (c)}}.
 
 }
 {\Large 
@@ -279,19 +332,175 @@ The following table gives the prices of bonds
 
 \subsection*{a)}
 Calculate zero rates for maturities of 6 months, 12 months, 18 months, and 24 months. \\ \\
-
+We'll use the bootstrap method as described in the text. \\
+For the 6 months, there's no coupon, so the return can be found by solving
+\[
+  100 = 98e^{0.5R}
+\]
+\[
+  e^{0.5R} = \frac{100}{98}
+\]
+\[
+  R = 2\ln(1.02040816327)
+\]
+\[
+  R = 0.04040541464
+\]
+so for the 6 month bond, the bond return is approximately \boxed{\textbf{4.04\%}}. \\ 
+Similarly, for the 12 month, there is no coupon, so we solve accordingly:
+\[
+  100 = 95e^{R}
+\]
+\[
+  e^{R} = \frac{100}{95}
+\]
+\[
+  R = \ln(1.05263157895)
+\]
+\[
+  R = 0.05129329439
+\]
+so for the 12 month bond, the return is approximately \boxed{\textbf{5.13\%}}. \\
+For the 18 month, there is a \(\frac{\textbf{\$6.20}}{2} = \) \$3.10 coupon every 6 months, with price of \$101, so we modify accordingly and solve:
+\[
+  3.10e^{-0.5 \cdot 0.0404} + 3.10e^{-1 \cdot 0.0513} + 103.10e^{-1.5R} = 101
+\]
+\[
+  3.03800822483 + 2.94498025204 + 103.10e^{-1.5R} = 101
+\]
+\[
+  e^{-1.5R} = \frac{95.0170115231}{103.10}
+\]
+\[
+  -1.5R = \ln(0.92160049973)
+\]
+\[
+  R = 0.05442896452
+\]
+so the 18 month rate is approximately \boxed{\textbf{5.44\%}}. \\
+Finally, the 24 month is similar, with a coupon of \(\frac{\text{\$8.00}}{2} = \) \$4.00 every 6 months, with price of \$104, and we solve similarly: 
+\[
+  4e^{-0.5 \cdot 0.0404} + 4e^{-1 \cdot 0.0513} + 4e^{-1.5 \cdot 0.0544} + 104e^{-2R} = 104
+\]
+\[
+  4e^{-0.0202} + 4e^{-0.0513} + 4e^{-0.0816} + 104e^{-2R} = 104
+\]
+\[
+  3.9200106127 + 3.79997451876 + 3.68656216477 + 104e^{-2R} = 104
+\]
+\[
+  e^{-2R} = \frac{92.5934527038}{104}
+\]
+\[
+  -2R = \ln(0.89032166061)
+\]
+\[
+  R = 0.05808623256
+\]
+So the 24 month bond has a return of approximately \boxed{\textbf{5.81\%}}
 
 \subsection*{b)}
 What are the forward rates for the periods: 6 months to 12 months, 12 months to 18 months, 18 months to 24 months? \\ \\ 
-
+We know that \(R_F = \frac{R_2 T_2 - R_1 T_1}{T_2 - T_1}\), so we apply accordingly with the rates we've found previously: \\
+- 6 months to 12 months: \(\frac{0.0513(1.0) - 0.0404(0.5)}{1.0 - 0.5} = \frac{0.0513 - 0.0202}{0.5} = 0.0622 = \) \boxed{\textbf{6.22\%}} \\
+- 12 months to 18 months: \(\frac{0.0544(1.5) - 0.0513(1.0)}{1.5 - 1.0} = \frac{0.0816 - 0.0513}{0.5} = 0.0606 = \) \boxed{\textbf{6.06\%}} \\
+- 18 months to 24 months: \(\frac{0.0581(2.0) - 0.0544(1.5)}{2.0 - 1.5} = \frac{0.1162 - 0.0816}{0.5} = 0.0692 = \) \boxed{\textbf{6.92\%}}
 
 \subsection*{c)}
 What are the 6-month, 12-month, 18-month, and 24-month par yields for bonds that provide semiannual coupon payments? \\ \\
-
+We know to calculate par yield using \(c = \frac{(100 - 100d) m}{A}\), with \(m = 2, d = e^{-R_n T_n}\), and \(A\) is the cumulative sums of the previous \(d\) . So for each bond, we calculate cumulative \(A\) and then solve for \(c\). \\
+- 6 month: 
+\[
+  c = \frac{2(100 - 100 \cdot e^{-0.0404 \cdot 0.5})}{e^{-0.040 \cdot 0.5}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot e^{-0.0202})}{e^{-0.0202}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot 0.98000265317)}{0.98000265317}
+\]
+\[
+  = \frac{3.999469366}{0.98000265317}
+\]
+\[
+  c = 4.08108014102
+\]
+so the 6 month par yield is approximately \boxed{\textbf{4.08\%}} \\ 
+- 12 month: 
+\[
+  c = \frac{2(100 - 100 \cdot e^{-0.0513 \cdot 1.0})}{e^{-0.040 \cdot 0.5} + e^{-0.0513 \cdot 1.0}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot e^{-0.0513})}{e^{-0.0202} + e^{-0.0513}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot 0.94999362969)}{0.98000265317 + 0.94999362969}
+\]
+\[
+  = \frac{10.001274062}{1.92999628286}
+\]
+\[
+  c = 5.18201726647
+\]
+so the 12 month par yield is approximately \boxed{\textbf{5.18\%}} \\ 
+- 18 month: 
+\[
+  c = \frac{2(100 - 100 \cdot e^{-0.0544 \cdot 1.5})}{e^{-0.040 \cdot 0.5} + e^{-0.0513 \cdot 1.0} + e^{-0.0544 \cdot 1.5}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot e^{-0.0816})}{e^{-0.0202} + e^{-0.0513} + e^{-0.0816}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot 0.92164054119)}{0.98000265317 + 0.94999362969 + 0.92164054119}
+\]
+\[
+  = \frac{15.671891762}{2.85163682405}
+\]
+\[
+  c = 5.49575304605
+\]
+so the 18 month par yield is approximately \boxed{\textbf{5.50\%}} \\ 
+- 24 month: 
+\[
+  c = \frac{2(100 - 100 \cdot e^{-0.0581 \cdot 2.0})}{e^{-0.040 \cdot 0.5} + e^{-0.0513 \cdot 1.0} + e^{-0.0544 \cdot 1.5} + e^{-0.0581 \cdot 2.0}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot e^{-0.1162})}{e^{-0.0202} + e^{-0.0513} + e^{-0.0816} + e^{-0.1162}}
+\]
+\[
+  = \frac{2(100 - 100 \cdot 0.89029714606)}{0.98000265317 + 0.94999362969 + 0.92164054119 + 0.89029714606}
+\]
+\[
+  = \frac{21.940570788}{3.74193397011}
+\]
+\[
+  c = 5.86343077223
+\]
+so the 24 month par yield is approximately \boxed{\textbf{5.86\%}} \\ 
 
 \subsection*{d)}
 Estimate the price and yield of a two-year bond providing a semiannual coupon of 7\% per annum. \\ \\
-
+We know each coupon payment to be \(\frac{0.07 \cdot 100}{2} = \)\$3.50. We calculate accordingly:
+\[
+  P = 3.5e^{-0.0404(0.5)} + 3.5e^{-0.0513(1.0)} + 3.5e^{-0.0544(1.5)} + 103.5e^{-0.0581(2.0)}
+\]
+\[
+  = 3.5e^{-0.0202} + 3.5e^{-0.0513} + 3.5e^{-0.0816} + 103.5e^{-0.1162}
+\]
+\[
+  = 3.4300092861 + 3.32497770392 + 3.22574189417 + 92.1457546172
+\]
+\[
+  P = 102.126483501
+\]
+so the price is \boxed{\textbf{\$102.13}}. For the yield, let's solve using this new price:
+\[
+  3.5e^{-0.5y} + 3.5e^{-y} + 3.5e^{-1.5y} + 103.5e^{-2y} = 102.13
+\]
+\[
+  3.5e^{-0.5y} + 3.5e^{-y} + 3.5e^{-1.5y} + 103.5e^{-2y} = 102.13
+\]
+We can guess and check for values of \(y\) as we did before, but instead I'll use an external solver to find \(y \approx 0.0577183\), so we find the yield to be approximately \boxed{\textbf{5.77\%}}.
 
 }
 
