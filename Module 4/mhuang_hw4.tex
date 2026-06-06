@@ -31,7 +31,23 @@ What is the difference between the forward price and the value of a forward cont
 
 \section*{5.4.}
 A stock index currently stands at 350. The risk-free interest rate is 8\% per annum (with continuous compounding) and the dividend yield on the index is 4\% per annum. What should the futures price for a four-month contract be? \\ \\
-
+We have an asset with a known yield, so we solve using 
+\[
+  F_0 = S_0 e^{(r-q)T}
+\]
+\[
+  = 350 \cdot e^{(0.08 - 0.04) \cdot \frac{4}{12}}
+\]
+\[
+  = 350 \cdot e^{0.04 \cdot \frac{1}{3}}
+\]
+\[
+  = 350 \cdot 1.0134226186
+\]
+\[
+  F_0 = 354.69791651
+\]
+so the futures price is \boxed{\textbf{\$354.70}}.
 
 }
 {\Large 
@@ -45,7 +61,7 @@ Explain carefully the meaning of the terms convenience yield and cost of carry. 
 
 \section*{5.7}
 Explain why a foreign currency can be treated as an asset providing a known yield. \\ \\
-
+A foreign currency can be treated as an asset providing a known yield -- i.e. at a predictable rate relative to the asset's actual value -- because the foreign currency provides some level of interest by just holding it. This interest accumulated by holding the foreign currency is a known percentage relative to the value of the foreign currency, so we can therefore predictably estimate the yield from the asset. 
 
 }
 {\Large 
