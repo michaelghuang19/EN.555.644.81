@@ -24,7 +24,7 @@
 
 \section*{5.2.}
 What is the difference between the forward price and the value of a forward contract? \\ \\
-
+The forward price is the actual price at which the asset would be agreed to be bought or sold at the set future time, while the value of the actual contract is the actual positive or negative return that the contract would generate as the spot price changes over time, starting initially at 0. So one is a specification of the contract while the other is a result from the specification of that contract. 
 
 }
 {\Large 
@@ -54,7 +54,12 @@ so the futures price is \boxed{\textbf{\$354.70}}.
 
 \section*{5.6}
 Explain carefully the meaning of the terms convenience yield and cost of carry. What is the relationship between futures price, spot price, convenience yield, and cost of carry? \\ \\
-
+The convenience yield essentially measures the return or level of benefit of directly holding on to a physical asset rather than owning futures contract on the physical asset. The cost of carry is the net cost of holding, i.e. carrying, the actual physical asset, which we define as the sum of the storage cost and the interest cost of financing the acquisition of the held asset. \\ \\
+To define the relationship between futures price, spot price, convenience yield, and cost of carry, we define the following equation: 
+\[
+  F_0 = S_0 e^{(c-y)T}
+\]
+with futures price \(F_0\), spot price \(S_0\), convenience yield \(y\), cost of carry \(c\), and time to the corresponding futures contract maturity \(T\). We calculate the futures price accordingly, given those other variables.
 
 }
 {\Large 
@@ -68,7 +73,20 @@ A foreign currency can be treated as an asset providing a known yield -- i.e. at
 
 \section*{5.12}
 Suppose that the risk-free interest rate is 10\% per annum with continuous compounding and that the dividend yield on a stock index is 4\% per annum. The index is standing at 400, and the futures price for a contract deliverable in four months is 405. What arbitrage opportunities does this create? \\ \\
-
+We can calculate the following futures price:
+\[
+  F_0 = S_0 e^{(c-y)T}
+\]
+\[
+  = 400 \cdot e^{(0.10 - 0.04) \cdot \frac{4}{12}}
+\]
+\[
+  = 400 \cdot e^{0.02}
+\]
+\[
+  F_0 = 408.080536012
+\]
+This theoretical futures price is higher than the actual futures price for the contract at 405. This indicates that the futures price is too low relative to the index, so to arbitrage, we should \textbf{buy the futures contracts that are cheap relative to its actual value, and then short the underlying stocks in the index, investing the returns from the short sale to invest at the risk-free rate.} At maturity, we would pay the dividends to the lender, then take delivery via the futures contract at 405 and use that to return the borrowed index and close the short position. 
 
 }
 {\Large 
@@ -86,22 +104,23 @@ where \(r\) is the interest rate (assumed constant) and there are no storage cos
 
 \section*{5.17.}
 When a known future cash outflow in a foreign currency is hedged by a company using a forward contract, there is no foreign exchange risk. When it is hedged using futures contracts, the daily settlement process does leave the company exposed to some risk. Explain the nature of this risk. In particular, consider whether the company is better off using a futures contract or a forward contract when... \\ \\
-Assume that the forward price equals the futures price
+Assume that the forward price equals the futures price. \\
 
 \subsection*{a)} 
 The value of the foreign currency falls rapidly during the life of the contract \\ \\
-
+When the value of the foreign currency falls rapidly during the life of the contract, the company will lose money regardless, but with the forward contract, this happens all at the end of the contract while with the futures contract the loss will be realized daily early during the duration of the contract, so we start paying margin immediately, which is worse on a present value basis since we lose out on gains on interest immediately. So we \boxed{\textbf{prefer the forward contract}} in this case. 
 
 \subsection*{b)}
 The value of the foreign currency rises rapidly during the life of the contract \\ \\
-
+When the value of the foreign currency rises rapidly during the life of the contract, the company realizes gains daily when using the futures contract rather than all at the end with the forward contract, so on a present value basis, we would \boxed{\textbf{prefer the futures contract}}.
 
 \subsection*{c)}
 The value of the foreign currency first rises and then falls back to its initial value \\ \\
-
+In this case, the outcome at maturity is the same, with no overall loss or gain with either contract. On a present value basis, with futures contracts, the company first realizes some gains daily when the foreign currency is rising, receiving positive cash flows and interest first before paying the original cash back. So in this case, we would \boxed{\textbf{prefer the futures contract}}.
 
 \subsection*{d)}
 The value of the foreign currency first falls and then rises back to its initial value \\ \\
+In this case, the outcome at maturity is also the same, with no overall loss or gain. On a present value, with the futures contract, the company first has to pay margin on the losses, and then is reimbursed. This initial payment and loss is not preferable to just taking 0 overall PnL with the forward contract, so in this case we \boxed{\textbf{prefer the forward contract}}.
 
 }
 {\Large 
@@ -115,6 +134,39 @@ Show that equation (5.3) is true by considering an investment in the asset combi
 
 \section*{5.27}
 An index is 1,200. The three-month risk-free rate is 3\% per annum and the dividend yield over the next three months is 1.2\% per annum. The six-month risk-free rate is 3.5\% per annum and the dividend yield over the next six months is 1\% per annum. Estimate the futures price of the index for three-month and six-month contracts. All interest rates and dividend yields are continuously compounded. \\ \\ 
+For the three-month contract:
+\[
+  F_0 = S_0 e^{(c-y)T}
+\]
+\[
+  = 1200 \cdot e^{(0.03 - 0.012) \cdot \frac{3}{12}}
+\]
+\[
+  = 1200 \cdot e^{0.018 \cdot \frac{1}{4}}
+\]
+\[
+  = 1200 \cdot 1.0045101402
+\]
+\[
+  F_0 = 1205.41216825
+\]
+So the futures price of the index for the three-month contract is approximately \boxed{\textbf{\$1,205.41}}. For the six-month contract:
+\[
+  F_0 = S_0 e^{(c-y)T}
+\]
+\[
+  = 1200 \cdot e^{(0.035 - 0.01) \cdot \frac{6}{12}}
+\]
+\[
+  = 1200 \cdot e^{0.025 \cdot \frac{1}{2}}
+\]
+\[
+  = 1200 \cdot 1.01257845154
+\]
+\[
+  F_0 = 1215.09414185
+\]
+So the futures price of the index for the six-month contract is approximately \boxed{\textbf{\$1,215.09}}.
 
 
 }
