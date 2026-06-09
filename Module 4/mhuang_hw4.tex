@@ -97,7 +97,8 @@ Suppose that \(F_1\) and \(F_2\) are two futures contracts on the same commodity
   F_2 \leq F_1 e^{r(t_2 - t_1)}
 \]
 where \(r\) is the interest rate (assumed constant) and there are no storage costs. For the purposes of this problem, assume that a futures contract is the same as a forward contract. \\ \\
-
+Assuming that a futures contract is the same as a forward contract here, we are essentially saying that the price of the future with later maturity date is less than or equal to the price of the earlier maturing futures contract at its maturity time \(t_1\) multiplied by \(e^{r(t_2 - t_1)}\), which we know to be equivalent to the continuously compounded interest at rate \(r\) from \(t_1\) to \(t_2\). We can easily see that this term is equal to the amount of money it costs to buy the commodity at \(t_1\) -- \(F_1\) -- plus the interest on the money it cost buy that commodity, \(F_1e^{r(t_2 - t_1)} - F_1\). \\ \\
+Using this information, we can test the inequality by seeing if it is possible that \(F_2 > F_1e^{r(t_2 - t_1)}\), that is, \(F_2 - F_1e^{r(t_2 - t_1)} > 0\). Looking at this, we set up the following situation: we buy the underlying commodity at \(t_1\) with a loan until \(t_2\), which represents the second term, i.e. we short the future with maturity \(t_1\). The first term therefore just represents a long on the future with maturity \(t_2\). So therefore there must not be an arbitrage opportunity when we long \(F_2\) and short \(F_1\). However, in reality, if this risk-free arbitrage opportunity existed, then the two terms should eventually equalize, so this situation of \(F_2 - F_1e^{r(t_2 - t_1)} > 0\) cannot exist, which essentially shows that \(F_2 - F_1e^{r(t_2 - t_1)} \leq 0\) or \(F_2 \leq F_1e^{r(t_2 - t_1)}\), as we initially sought to prove.
 
 }
 {\Large 
@@ -127,7 +128,31 @@ In this case, the outcome at maturity is also the same, with no overall loss or 
 
 \section*{5.20}
 Show that equation (5.3) is true by considering an investment in the asset combined with a short position in a futures contract. Assume that all income from the asset is reinvested in the asset. Use an argument similar to that in footnotes 2 and 4 of this chapter and explain in detail what an arbitrageur would do if equation (5.3) did not hold. \\ \\
-
+We aim to derive equation (5.3), i.e. that 
+\[
+  F_0 = S_0 e^{(r-q)T}
+\]
+Using the same formatting from the text, where we know that if all income is reinvested in the asset, then the number of units held of the asset grows at rate \(q\) during time \(T\), where \(q\) is the average yield on the asset within the time period. We want to set up a situation where we buy exactly enough at time 0 to to deliver one unit of the asset and receive \(F_0\), the price of the asset at \(T\), thus closing the short futures contract. This amount we buy \(x\) becomes the same value as one unit of the asset when reinvested, i.e. 
+\[
+  1 = x \cdot e^{qT}
+\]
+\[
+  x = \frac{1}{e^{qT}}
+\]
+\[
+  x = e^{-qT}
+\]
+So we invest in \(e^{-qT}\) units of the asset, at the total cost of \(S_0 \cdot e^{-qT}\). We also need to enter this into a short futures contract, to sell the one unit of the asset which we will eventually hold at \(T\) for the \(F_0\) which we are due to receive. We know that we are guaranteed to receive \(F_0\), so this is a risk-free investment which we discount accordingly at the risk-free rate \(r\), so we end up discounting to get to the present value of \(F_0e^{-rT}\) with the setup cost of \(S_0e^{-qT}\), i.e.
+\[
+  F_0e^{-rT} = S_0e^{-qT}
+\]
+\[
+  F_0 = S_0e^{(r-q)T}
+\]
+exactly as we sought to show. \\ \\
+If this equation did not hold, the arbitrageur would be able to profit in the following ways: \\
+- If \(F_0 > S_0e^{(r-q)T}\), i.e. the price of the forward is higher than the investment cost, then the arbitrageur should borrow \(S_0e^{-qT}\) at interest rate \(r\), and invest this in \(e^{-qT}\) units of the asset, which as we showed above eventually reaches the value of \(F_0\), or 1 asset. At the same time, the arbitrageur enters a short futures contract to sell 1 unit of the asset at time \(T\) for the price of \(F_0\). At \(T\), the arbitrageur then therefore has 1 unit of the actual asset, which they use to fulfill the short futures contract and deliver the unit, receiving \(F_0\). Finally, they then pay off the loan amount which has grown to \(S_0e^{(r-q)T}\), which leads to profit in this case since our total cash flow is \(F_0 - S_0e^{(r-q)T}\), which in our first assumption \(F_0 > S_0e^{(r-q)T}\) indicates that this is positive, and therefore a profitable strategy. \\
+- If \(F_0 < S_0e^{(r-q)T}\), i.e. the price of the forward is lower than the investment cost, then the arbitrageur should do the reverse -- they should sell \(e^{-qT}\) of the asset to instantly get \(S_0e^{-qT}\) which they should then invest at the risk-free rate \(r\). Then, the arbitrageur should enter into a long forward contract to buy 1 unit of the asset at time \(T\) for \(F_0\). The money gained from initially buying the asset has now grown at the risk free rate to \(S_0e^{(r-q)T}\), and they can then buy the 1 unit of the asset for \(F_0\). This newly acquired \(1 - e^{-qT}\) of the asset is the same as it would have been had we just reinvested the returns of the \(e^{-qT}\) we initially sold, so we come out with 1 unit of asset just as we would have without running this strategy, except with \(S_0e^{(r-q)T} - F_0\) cash left over, which is a positive amount, according to our initial assumption \(F_0 < S_0e^{(r-q)T}\). 
 
 }
 {\Large 
