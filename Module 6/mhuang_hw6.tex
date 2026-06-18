@@ -1,0 +1,150 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework 6
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{Problem 1 (7.1)}
+Companies A and B have been offered the following rates per annum on a \$20 million five-year loan:
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  & Fixed Rate & Floating Rate \\ 
+ \hline
+ Company A & 5.0\% & SOFR + 0.1\% \\ 
+ \hline
+ Company B & 6.4\% & SOFR + 0.6\% \\ 
+ \hline
+\end{tabular}
+\end{center}
+Company A requires a floating-rate loan; company B requires a fixed-rate loan. Design a swap that will net a bank, acting as intermediary, 0.1\% per annum and that will appear equally attractive to both companies. \\ \\
+Using the comparative advantage argument as detailed in the text, we see that with Company A has a comparative advantage in fixed rate markets, with the spread being \(6.4 - 5.0 = 1.5\%\). Meanwhile, Company B has a comparative advantage in floating rate markets, with the spread being \(0.6 - 0.1 = 0.5\%\). The total apparent gain is therefore \(1.5 - 0.5 = 0.9\%\). Because the intermediary bank nets \(0.1\%\) per annum, we should design a swap to make Company A and Company B both \(0.4\%\) per annum better off. \\ \\
+Each company ought to borrow where it has an advantage, so Company A borrows at fixed rate of \(0.5\%\), and Company B borrows at floating rate of SOFR + 0.6\%. On the other hand, with the knowledge that both should be \(0.4\%\) per annum better off, we see that Company A who would normally borrow at SOFR + 0.1\% should borrow at SOFR - 0.3\% after this, while Company B who would normally pay 6.4\% should be borrowing at 6.0\% instead after this. \\ \\
+The structure that would work for this is like so: \\
+- Company A borrows at fixed 5.0\% where it is strongest. Company A then pays SOFR to the bank. Company A then receives 5.3\% via the bank from Company A, after the 0.1\% bank cut. Company A's total borrow cost is therefore 5.0\% + SOFR - 5.3\% = SOFR - 0.3\% as we hoped. \\
+- Company B borrows at floating SOFR + 0.6\% where it is strongest. Company B then receives SOFR via the bank from Company A. Company B then pays 5.4\% to the bank. Company B's total borrow cost is therefore SOFR + 0.6\% - SOFR + 5.4\% = 6.0\% as we hoped. 
+
+}
+{\Large 
+
+\section*{Problem 3 (7.4)}
+A currency swap has a remaining life of 15 months. It involves exchanging interest at 10\% on £20 million for interest at 6\% on \$30 million once a year. The term structure of interest rates in both the United Kingdom and the United States is currently flat, and if the swap were negotiated today the interest rates exchanged would be 4\% in dollars and 7\% in sterling. All interest rates are quoted with annual compounding. The current exchange rate (dollars per pound sterling) is 1.5500. What is the value of the swap to the party paying sterling? What is the value of the swap to the party paying dollars? \\ \\
+We calculate the present value for the 1.25 years of the remaining life of the currency swap for both legs: \\
+- Sterling: \(\frac{0.1 \cdot 20000000}{1.07^\frac{1}{4}} + \frac{20 + (0.1 \cdot 20000000)}{1.07^\frac{5}{4}} = \frac{2000000}{1.017058525} + \frac{22000000}{1.08825262175} = 1966455.17523 + 20215894.3248 = \text{22,182,349.50 pounds}\) \\
+- USD: \(\frac{0.06 \cdot 30000000}{1.04^\frac{1}{4}} + \frac{30 + (0.06 \cdot 30000000)}{1.04^\frac{5}{4}} = \frac{1800000}{1.00985340655} + \frac{31800000}{1.05024754281} = 1782436.92433 + 30278575.9583 \approx \text{\$32,061,012.88}\) \\ \\
+At the current exchange rate, the value of the swap to the party paying sterling is \(32061012.88 - (1.5500 \cdot 22182349.50) = 32061012.88 - 34382641.725 \approx \boxed{\textbf{\$-2,321,628.85}}\). And by symmetry, the corresponding value of the swap to the party paying dollars is therefore \boxed{\textbf{\$2,321,628.85}}.
+
+}
+{\Large 
+
+\section*{Problem 3 (7.5)}
+Explain the difference between the credit risk and the market risk in a financial contract. \\ \\
+In a financial contract: \\
+- Credit risk is risk of loss related to the possibility of the counterparty defaulting \\
+- Market risk is risk of contract value decrease related to volatility in market-related variables such as interest rates, equity prices, and exchange rates.
+
+}
+{\Large 
+
+\section*{Problem 4 (7.8)}
+Companies X and Y have been offered the following rates per annum on a \$5 million 10-year investment:
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  & Fixed Rate & Floating Rate \\ 
+ \hline
+ Company X & 8.0\% & SOFR \\ 
+ \hline
+ Company Y & 8.8\% & SOFR \\ 
+ \hline
+\end{tabular}
+\end{center}
+Company X requires a fixed-rate investment; company Y requires a floating-rate investment. Design a swap that will net a bank, acting as intermediary, 0.2\% per annum and will appear equally attractive to X and Y. \\ \\
+Here, we see that the fixed rate spread is \(8.8 - 8.0 = 0.8\%\) while the floating rate spread is 0.0\%. As the bank's cut is 0.2\%, the total apparent gain would be \(0.8 - 0.2 = 0.6\%\), which means 0.3\% each to both Company X and Company Y. As dictated in the problem statement, Company X wants a fixed-rate investment, so with this, it should be earning 8.0 + 0.3 = 8.3\%; in a similar vein, Company Y should be earning SOFR + 0.3\%. Each will invest in where it has comparative advantage and the other direction of the investment, i.e. Company Y invests at fixed rate of 8.8\%, while Company X invests at floating rate of SOFR. \\ \\
+The structure of the swap that fits this would be like so: \\
+- Company X invests at floating rate SOFR. Company X then pays SOFR to the bank. Company X then receives 8.3\% from Company Y via the bank, after the bank's 0.2\% cut. This leads to a net inflow of SOFR - SOFR + 8.3\% = 8.3\% as we hoped. \\
+- Company Y invests at fixed rate 8.8\%. Company Y then receives SOFR from Company X via the bank. Company Y then pays 8.5\% to the bank. This leads to a net inflow of 8.8\% - 8.5\% + SOFR = SOFR + 0.3\% as we hoped.
+
+}
+{\Large 
+
+\section*{Problem 5 (7.10)}
+A financial institution has entered into a 10-year currency swap with company Y. Under the terms of the swap, the financial institution receives interest at 3\% per annum in Swiss francs and pays interest at 8\% per annum in U.S. dollars. Interest payments are exchanged once a year. The principal amounts are 7 million dollars and 10 million francs. Suppose that company Y declares bankruptcy at the end of year 6, when the exchange rate is \$0.80 per franc. What is the cost to the financial institution? Assume that, at the end of year 6, the interest rate is 3\% per annum in Swiss francs and 8\% per annum in U.S. dollars for all maturities. All interest rates are quoted with annual compounding. \\ \\
+The key parts from the problem are that the CHF bond is received at rate of 3\% with 10 million CHF principal, and the USD bond paid at rate of 8\% with 7 million USD principal. The spot rate is 0.8 at the end of year 6, when bankruptcy is declared after the payments are exchanged. With annual compounding, we can calculate the value of the swap as as bundles of forward FX contracts, we can calculate forward rates from beyond year 6
+\[
+  F_0 = S_0(\frac{1 + r}{1 + r_f})^T
+\]
+So we have the following forward rates: \\
+- End of year 7: \(0.8(\frac{1 + 0.08}{1 + 0.03})^1 = 0.8(\frac{1.08}{1.03}) = 0.83883495145 \) \\
+- End of year 8: \(0.8(\frac{1 + 0.08}{1 + 0.03})^2 = 0.8(\frac{1.08}{1.03})^2 = 0.87955509473 \) \\
+- End of year 9: \(0.8(\frac{1 + 0.08}{1 + 0.03})^3 = 0.8(\frac{1.08}{1.03})^3 = 0.92225194398 \) \\
+- End of year 10: \(0.8(\frac{1 + 0.08}{1 + 0.03})^4 = 0.8(\frac{1.08}{1.03})^4 = 0.96702145583 \) \\ \\
+Each year, Company Y pays \( 0.08 \cdot \text{7,000,000}\) = \$560,000 per year, with the exception of year 10, at which Company Y pays 7,000,000 + 560,000 = \$7,560,000. In the same vein, Company Y also receives \(0.03 \cdot \text{10,000,000}\) = 300,000 CHF per year, with the exception of year 10, at which Company Y receives 10,000,000 + 300,000 = 10,300,000 CHF. From the perspective of the financial institution, it therefore has the following cash flows for the years after year 6, when accounting for forward rates and the 8\% risk-free rate used to discount: \\ 
+- End of year 7: \(\frac{\text{560,000} - (0.83883495145 \cdot \text{300,000})}{1.08^1} = \frac{308349.514565}{1.08} = 285508.809782 \approx \text{\$285,508.81}\) \\ 
+- End of year 8: \(\frac{\text{560,000} - (0.87955509473 \cdot \text{300,000})}{1.08^2} = \frac{296133.471581}{1.1664} = 253886.721177 \approx \text{\$253,886.72} \) \\
+- End of year 9: \(\frac{\text{560,000} - (0.92225194398 \cdot \text{300,000})}{1.08^3} = \frac{283324.416806}{1.259712} = 224912.056729 \approx \text{\$224,912.06} \) \\
+- End of year 10: \(\frac{\text{7,560,000} - (0.96702145583 \cdot \text{10,300,000})}{1.08^4} = \frac{-2400320.99505}{1.36048896} = -1764307.58766 \approx \text{\$-1,764,307.59} \) \\
+So the total cash flow for the institution would be approximately
+\[
+  285508.81 + 253886.72 + 224912.06 - 1764307.59 = \boxed{\textbf{\$-1,000,000}}
+\]
+i.e. this situation costed the financial instution a million dollars.
+
+}
+{\Large 
+
+\section*{Problem 6}
+
+
+
+}
+{\Large 
+
+\section*{Problem 7}
+
+
+
+}
+{\Large 
+
+\section*{Problem 9 (7.22)}
+Company A, a British manufacturer, wishes to borrow U.S. dollars at a fixed rate of interest. Company B, a US multinational, wishes to borrow sterling at a fixed rate of interest. They have been quoted the following rates per annum (adjusted for differential tax effects):
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  & Sterling & US Dollars \\ 
+ \hline
+ Company A & 11.0\% & 7.0\% \\ 
+ \hline
+ Company B & 10.6\% & 6.2\% \\ 
+ \hline
+\end{tabular}
+\end{center}
+Design a swap that will net a bank, acting as intermediary, 10 basis points per annum and that will produce a gain of 15 basis points per annum for each of the two companies. \\ \\
+Company A pays 11.0 - 10.6 = 0.4\% more in the Sterling market, and 7.0 - 6.2 = 0.8\% more in the USD market. The total gain is therefore 0.8 - 0.4 = 0.4\%, which is 40 bps, and the bank takes 10 bps, and each company makes 15 bps, which indeed adds up to 10 + 15 + 15 = 40 bps. Company B is relatively cheaper in USD with the lower spread, and with the problem statement, it will indeed start by borrowing USD in order to swap to get the sterling, and vice versa for Company A. Therefore, Company A borrows Sterling at 11.0\%, and Company B borrows USD at 6.2\%. With the end gain of the swap, we expect Company A to have total borrow to cost to be 15 bps better than their normal USD rate, i.e. 7.0 - 0.15 = 6.85\%; and for Company B this rate for Sterling should be 10.6 - 0.15 = 10.45\%. \\ \\
+The structure of the swap that fits this would be the following: \\
+- Company A borrows Sterling at 11\%. Company A then borrows USD from the bank at the desired rate 6.85\%. Company A then receives sterling at 11\%. We easily see that the net rate is 11 + 6.85 - 11 = 6.85\% as we hoped. \\
+- Company B borrows USD at 6.2\%. Company B then receives USD at 6.2\%. Company B then borrows Sterling from the bank at the desired 10.45\% rate. We easily see that the net rate is 6.2 - 6.2 + 10.45 = 10.45\% as we hoped. \\
+- For the bank, we can confirm that everything checks out with the bank receiving 6.85 - 6.2 = 0.65\% from the USD leg and paying 11.0 - 10.45 = 0.55\% from the Sterling leg, for a net of 0.65 - 0.55 = 0.10\%, or 10 bps as we hoped.
+
+}
+
+\end{document}
