@@ -1,0 +1,142 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework 5
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{6.4}
+A Eurodollar futures price changes from 96.76 to 96.82. What is the gain or loss to an investor who is long two contracts? \\ \\
+The Eurodollar futures contract is designed such that each basis point (0.01) move corresponds to a change in \$25 in the contract. So with a \(96.82 - 96.76 = 0.06\) change for 2 contracts at \$25 per contract, this totals to 
+\[
+  6 \cdot 2 \cdot \$25 = \boxed{\textbf{\$300 gained}}
+\]
+
+}
+{\Large 
+
+\section*{6.6}
+The 350-day LIBOR rate is 3\% with continuous compounding and the forward rate calculated from a Eurodollar futures contract that matures in 350 days is 3.2\% with continuous compounding. Estimate the 440-day zero rate. \\ \\
+We know that 
+\[
+  R_2 = \frac{R_F(T_2 - T_1) + R_1T_1}{T_2}
+\]
+so we substitute accordingly:
+\[
+  R_2 = \frac{3.2 \cdot (440 - 350) + 3 \cdot 350}{440}
+\]
+\[
+  = \frac{0.032 \cdot 90 + 0.03 \cdot 350}{440} = \frac{2.88 + 10.50}{440} = \frac{13.38}{440} = 0.0304090909 = \boxed{\textbf{3.04\%}}
+\]
+
+}
+{\Large 
+
+\section*{6.9}
+It is May 5, 2014. The quoted price of a government bond with a 12\% coupon that matures on July 27, 2024, is 110-17. What is the cash price? \\ \\
+We know to find the cash price, we simply need to take the sum of the quoted price and the accrued interest since the last coupon date. The previous coupon date would have been January 27. There are 98 days between January 27 and May 5, and there are 181 days between January 27 and July 27. Using this, we can calculate the accrued interest for the days so far:
+\[
+  \frac{12}{2} \cdot \frac{98}{181} = 6 \cdot 0.54143646408 = 3.24861878448
+\]
+With the quoted price being 110 \(\frac{17}{32} = 110.53125\), we know the cash price to be 
+\[
+  110.53125 + 3.24861878448 = 113.779868784 \approx \boxed{\textbf{\$113.78}}
+\]
+
+}
+{\Large 
+
+\section*{6.11}
+It is July 30, 2015. The cheapest-to-deliver bond in a September 2015 Treasury bond futures contract is a 13\% coupon bond, and delivery is expected to be made on September 30, 2015. Coupon payments on the bond are made on February 4 and August 4 each year. The term structure is flat, and the rate of interest with semiannual compounding is 12\% per annum. The conversion factor for the bond is 1.5. The current quoted bond price is \$110. Calculate the quoted futures price for the contract. \\ \\ 
+We first need to get the cash price of the bond by adding the quoted price to the proportion of the next coupon payment that accrues to the holder. We know with the semiannual coupon the rate is \(\frac{13}{2} = 6.5\). The days since the last coupon payment is the number of days between February 4 and July 30, which is 176. The days between February 4 and August 4 is 181. The cash price of the bond is therefore 
+\[
+  110 + \frac{176}{181} \cdot 6.5 = 110 + 6.3204419889 = 116.3204419889 \approx 116.32
+\]
+With continuous compounding, the interest rate using \(\frac{12}{2} = 6\%\) is 
+\[
+  2 \ln(1.06) = 2 \cdot 0.05826890812 = 0.11653781624
+\]
+There are 5 days between July 30 and August 4th, when the coupon of 6.5 will be paid. The present value of the coupon itself is therefore 
+\[
+  6.5 \cdot e^{-0.01369863013 \cdot \frac{5}{365}} = 6.5 \cdot 0.99840486514 =  6.48963162341 \approx 6.49
+\]
+There are 62 days between July 30 and September 30, so the cash futures price on the bond would be 
+\[
+  (116.32 - 6.490) \cdot e^{\frac{62}{365} \cdot 0.11653781624} = 109.83 \cdot 1.01999269415 = 112.025797598 \approx 112.03
+\]
+There are 57 days between August 4 and September 30 for which interest would have accrued after the coupon date, out of the 184 days between August 4 and February 4 for the next day. The quoted futures price should therefore be 
+\[
+  \frac{112.03 - (6.5 \cdot \frac{57}{184})}{1.5} = \frac{112.03 - 2.013586956}{1.5} = \frac{110.016413044}{1.5} = 73.344275362 \approx \boxed{\textbf{\$73.34}}
+\]
+
+}
+{\Large 
+
+\section*{6.14}
+Suppose that the 300-day LIBOR zero rate is 4\% and Eurodollar quotes for contracts maturing in 300, 398 and 489 days are 95.83, 95.62, and 95.48. Calculate 398-day and 489-day LIBOR zero rates. Assume no difference between forward and futures rates for the purposes of your calculations. \\ \\ 
+In assuming no difference between forward and future rates, we can essentially directly calculate using 
+\[
+  R_2 = \frac{R_F(T_2-T_1)+R_1T_1}{T_2}
+\]
+Translating the forward rates by subtracting each rate from 100: \\
+- 300 days: \(100 - 95.83 = 4.17\%\) \\
+- 398 days: \(100 - 95.62 = 4.38\% \) \\
+- 489 days: \(100 - 95.48 = 4.52\% \) \\ \\
+Starting from the 389-day LIBOR zero rate, taking 300 days to 398 days:
+\[
+  R_{398} = \frac{0.417 \cdot (398 - 300) + 0.04 \cdot 300}{398}
+\]
+\[
+  =  \frac{0.0417 \cdot 98 + 0.04 \cdot 300}{398} = \frac{4.0866 + 12}{398} = \frac{16.0866}{398} = 0.04041859296 \approx 0.404 = \boxed{\textbf{4.04\%}}
+\]
+And for the 489-day rate:
+\[
+  R_{489} = \frac{0.438 \cdot (489 - 398) + 0.0404 \cdot 398}{489}
+\]
+\[
+  = \frac{0.0438 \cdot 91 + 0.0404 \cdot 398}{489} = \frac{3.9858 + 16.0792}{489} = \frac{20.065}{489} = 0.04103271 \approx 0.410 = \boxed{\textbf{4.10\%}}
+\]
+
+}
+{\Large 
+
+\section*{6.21}
+The three-month Eurodollar futures price for a contract maturing in six years is quoted as 95.20. The standard deviation of the change in the short-term interest rate in one year is 1.1\%. Estimate the forward LIBOR interest rate for the period between 6.00 and 6.25 years in the future. \\ \\
+We know we can use the convexity adjustment term to sort out the difference between the futures and forward rate difference:
+\[
+  F_{Forward} = F_{Futures} - \frac{1}{2} \sigma^2 T_1 T_2
+\]
+So we solve accordingly:
+\[
+  = \frac{100 - 95.20}{100} - \frac{0.011^2 \cdot 6 \cdot 6.25}{2}
+\]
+\[
+  = \frac{4.80}{100} - \frac{0.0045375}{2}
+\]
+\[
+  = 0.048 - 0.00226875
+\]
+\[
+  F_{Forward} = 0.04573125 \approx 0.0457 = \boxed{\textbf{4.57\%}}
+\]
+
+}
+
+\end{document}
