@@ -112,15 +112,107 @@ i.e. this situation costed the financial instution a million dollars.
 {\Large 
 
 \section*{Problem 6}
-
-
+The SOFR zero curve is flat at 5\% (continuously compounded) out to 1.5 years. Swap rates for 2- and 3-year semiannual pay swaps are 5.4\% and 5.6\%, respectively. Estimate the SOFR zero rates for maturities of 2.0, 2.5, and 3.0 years. (Assume that the 2.5-year swap rate is the average of the 2- and 3-year swap rates.) \\ \\
+We are doing semiannual swaps with the following rates: \\
+- 0 to 1.5 years: 5\% \\
+- 2 year: 5.4\% \\
+- 2.5 year: \(\frac{5.4 + 5.6}{2} = 5.5\%\) \\
+- 3 year: 5.6\% \\
+Setting par to \$100, we build off of each calculation to find the corresponding SOFR zero rates at each time interval: \\ \\
+For 2.0 years:
+\[
+  100 = \frac{5.4}{2}(e^{-0.05 \cdot 0.5} + e^{-0.05 \cdot 1.0} + e^{-0.05 \cdot 1.5}) + (100 + \frac{5.4}{2})e^{-R_2 \cdot 2.0}
+\]
+\[
+  100 = 2.7(e^{-0.025} + e^{-0.05} + e^{-0.075}) + 102.7e^{-R_2 \cdot 2.0}
+\]
+\[
+  100 = 2.7(0.97530991 + 0.95122942 + 0.92774349) + 102.7e^{-2R_2}
+\]
+\[
+  100 - 2.7(2.85428282) = 102.7e^{-2R_2}
+\]
+\[
+  e^{-2R_2} = \frac{92.29343639}{102.7}
+\]
+\[
+  R_2 = \frac{\ln(0.89867027)}{-2}
+\]
+\[
+  R_2 = 0.05341954 \approx 0.0534 = \boxed{\textbf{5.34\%}}
+\]
+For 2.5 years: 
+\[
+  100 = \frac{5.5}{2}(e^{-0.05 \cdot 0.5} + e^{-0.05 \cdot 1.0} + e^{-0.05 \cdot 1.5} + e^{-0.0534 \cdot 2.0}) + (100 + \frac{5.5}{2})e^{-R_{2.5} \cdot 2.5}
+\]
+\[
+  100 = 2.75(e^{-0.025} + e^{-0.05} + e^{-0.075} + e^{-0.1068}) + 102.75e^{-2.5R_{2.5}}
+\]
+\[
+  100 = 2.75(0.97530991 + 0.95122942 + 0.92774349 + 0.8987054) + 102.75e^{-2.5R_{2.5}}
+\]
+\[
+  100 - 2.75(3.75298822) = 102.75e^{-2.5R_{2.5}}
+\]
+\[
+  e^{-2.5R_{2.5}} = \frac{89.6792824}{102.75}
+\]
+\[
+  R_{2.5} = \frac{\ln(0.87279107)}{-2.5}
+\]
+\[
+  R_{2.5} = 0.05442363 \approx 0.0544 = \boxed{\textbf{5.44\%}}
+\]
+For 3.0 years:
+\[
+  100 = \frac{5.6}{2}(e^{-0.05 \cdot 0.5} + e^{-0.05 \cdot 1.0} + e^{-0.05 \cdot 1.5} + e^{-0.0534 \cdot 2.0} + e^{-0.0544 \cdot 2.5}) + (100 + \frac{5.6}{2})e^{-R_{3} \cdot 3.0}
+\]
+\[
+  100 = 2.8(e^{-0.025} + e^{-0.05} + e^{-0.075} + e^{-0.1068} + e^{-0.1360}) + 102.8e^{-3R_{3}}
+\]
+\[
+  100 = 2.8(0.97530991 + 0.95122942 + 0.92774349 + 0.8987054 + 0.87284263) + 102.8e^{-3R_{3}}
+\]
+\[
+  100 - 2.8(4.62583085) = 102.8e^{-3R_{3}}
+\]
+\[
+  e^{-3R_3} = \frac{87.04767362}{102.8}
+\]
+\[
+  R_3 = \frac{\ln(0.84676725)}{-3}
+\]
+\[
+  R_3 = 0.05544314 \approx 0.0554 = \boxed{\textbf{5.54\%}}
+\]
 
 }
 {\Large 
 
 \section*{Problem 7}
-
-
+Under the terms of an interest rate swap, a financial institution has agreed to pay 10\% per annum and receive three-month SOFR in return on a notional principal of \$100 million with payments being exchanged every three months. The swap has a remaining life of 14 months. The average of the bid and offer fixed rates currently being swapped for three-month SOFR is 12\% per annum for all maturities. The three-month SOFR rate one month ago was 11.8\% per annum. All rates are compounded quarterly. What is the value of the swap? \\ \\
+For the floating leg -- We know that the next received amount in 2 months will be \(\frac{0.118}{4} \cdot 100 = 0.0295 \cdot 100 = \) \$2.95 million instead of \$3 million. For the fixed leg payments, we know the payment amount to be \(0.1 \cdot 100 = \) \$10 million per year, or \(\frac{10}{4} = \) \$2.5 million every 3 months / quarter. Using the discount factor as \(e^{-0.03 \cdot t}\):
+\begin{center}
+\begin{tabular}{ |c|c|c|c|c|c| } 
+ \hline
+ Time & Fixed Leg & Floating Leg & Net Value & Discount Factor & Present Value \\ 
+ \hline
+ 2 months & -2.5 & +2.95 & 0.45 & 0.99501248 & 0.44775562 \\ 
+ \hline
+ 5 months & -2.5 & +3.00 & 0.5 & 0.9875778 & 0.4937889 \\ 
+ \hline
+ 8 months & -2.5 & +3.00 & 0.5 & 0.98019867 & 0.49009934 \\ 
+ \hline
+ 11 months & -2.5 & +3.00 & 0.5 & 0.97287468 & 0.48643734 \\ 
+ \hline
+ 14 months & -2.5 & +3.00 & 0.5 & 0.96560542 & 0.48280271 \\ 
+ \hline
+\end{tabular}
+\end{center}
+\[
+  0.44775562 + 0.4937889 + 0.49009934 + 0.48643734 + 0.48280271 = 2.40088391 \approx 2.4 
+\]
+Which indicates the value of the swap to be approximately \boxed{\textbf{2.4 million dollars}}.
 
 }
 {\Large 
