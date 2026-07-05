@@ -74,22 +74,111 @@ We found in Problem 11.19 that the fair put price should be \$2.51, so if this p
 {\Large 
 
 \section*{11.23}
-Prove the result in equation (11.7). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal toK and (b) a portfolio consisting of an American put option plus one share.) \\ \\
-
+Prove the result in equation (11.7). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal to K and (b) a portfolio consisting of an American put option plus one share.) \\ \\
+We aim to prove that with no dividends, 
+\[
+  S_0 - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+With an American call, it is never optimal to exercise it early for a non-dividend-paying stock, so we have \(C = c\). Using put-call parity, we therefore have 
+\[
+  c + Ke^{-rT} = p + S_0
+\]
+\[
+  c - p = S_0 - Ke^{-rT}
+\]
+We know that an American put is always worth more than a European put because of its flexible exercise timing, and as \(C = c\), we have that 
+\[
+  C - P \leq c - p = S_0 - Ke^{-rT}
+\]
+\[
+  C - P \leq S_0 - Ke^{-rT}
+\]
+which is the second inequality. \\
+Looking at the first inequality, we consider the portfolios mentioned in the hint: \\
+(a) a portfolio consisting of a European call plus an amount of cash equal to K \\
+(b) a portfolio consisting of an American put option plus one share \\
+Assuming both options have the same exercise price and expiration date, if the put option is not exercised early, the American portfolio is worth \(\max(S_T, K)\), while the European portfolio with the cash invested at the risk-free rate is worth \(\max(S_T - K, 0) + Ke^{rT} = \max(S_T, K) - K + Ke^{rT} \geq \max(S_T, K)\). \\
+If the put is indeed exercised early, though, then the American portfolios is worth \(K\), while the European portfolio is worth at least $Ke^{rT} \geq K$. So in both cases, the European portfolio is worth at least as much as the American portfolio. In other words, \(c + K \geq P + S_0\), and as we stated previously, \(C = c\), so we have 
+\[ 
+  C + K \geq P + S_0
+\]
+\[ 
+  C - P \geq S_0 - K
+\]
+which combining with the first part of the proof, we come to our desired conclusion that
+\[
+  S_0 - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
 
 }
 {\Large 
 
 \section*{11.24}
-Prove the result in equation (11.11). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal toD K+ and (b) a portfolio consisting of an American put option plus one share.) \\ \\
-
+Prove the result in equation (11.11). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal to D + K and (b) a portfolio consisting of an American put option plus one share.) \\ \\
+We aim to prove that with dividends, 
+\[
+  S_0 - D - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+We repeat the same process as above -- starting with the right-hand inequality, we have the result of \(C-P \leq S_0-Ke^{-rT}\) as previously found with the no dividends. Introducing dividends causes the stock price to decrease, which leads the call price \(C\) to decrease put price \(P\) to increase, so \(C - P\) only decreases overall, so this inequality still holds. \\ \\
+We now move on to the first inequality, again considering the portfolios mentioned in the hint: \\
+(a) a portfolio consisting of a European call plus an amount of cash equal to D + K \\
+(b) a portfolio consisting of an American put option plus one share \\
+Assuming again the same exercise price and expiration date, if the put is not exercised early, the American portfolio is worth \(\max(S_T, K) + De^{rT}\) with the additional dividends invested at the risk-free rate now. The European portfolio would be worth \(\max(S_T - K, 0) + (D + K)e^{rT} = \max(S_T, K) + De^{rT} + Ke^{rT} - K\), and we can clearly see that \(\max(S_T, K) + De^{rT} + Ke^{rT} - K \geq \max(S_T, K) + De^{rT}\). \\
+If the put is exercised early, then we now have that the American portfolio is worth at most \(K + De^{rT}\) with the strike price and dividend reinvestment, while the European portfolio has the cash reinvested, so it has value of at least \((D + K)e^{rT}\), so the cash part of the European portfolio itself already has value greater than the upper bound value of the American portfolio. We can therefore conclude that \(c + D + K \geq P + S_0\), and with \(C \geq c\) now with dividends, we have that 
+\[
+  C + D + K \geq P + S_0
+\]
+\[
+  C - P \geq S_0 - D - K
+\]
+Finally, combining with the second part of the inequality which we evaluated first, we indeed find that 
+\[
+  S_0 - D - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
 
 }
 {\Large 
 
 \section*{11.26}
-Use the software DerivaGem to verify that Figures 11.1 and 11.2 are correct. 
-
+Use the software DerivaGem to verify that Figures 11.1 and 11.2 are correct. \\
+The textbook Figure 11.1: 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{textbook_11_1.png}
+\end{figure}
+Using DerivaGem, we create the corresponding figures that match up with Figure 11.1 above, although with slightly differently scaled axes:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_a.png}
+  \includegraphics[width=250pt]{derivagem_11_1_b.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_c.png}
+  \includegraphics[width=250pt]{derivagem_11_1_d.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_e.png}
+  \includegraphics[width=250pt]{derivagem_11_1_f.png}
+\end{figure} \\ \\ \\ \\ \\ \\ \\ \\ \\
+Now, the textbook Figure 11.2:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{textbook_11_2.png}
+\end{figure} \\ 
+In the same way, using DerivaGem, we create the corresponding figures that match up with Figure 11.2 above, although also with slightly differently scaled axes:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_2_a.png}
+  \includegraphics[width=250pt]{derivagem_11_2_b.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_2_c.png}
+  \includegraphics[width=250pt]{derivagem_11_2_d.png}
+\end{figure} \\ \\
+All these DerivaGem-sourced figures match the textbook figures pretty well. 
 
 }
 {\Large 
