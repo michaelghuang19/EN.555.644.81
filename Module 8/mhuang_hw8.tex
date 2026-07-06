@@ -188,8 +188,27 @@ Suppose that \(c_1, c_2,\) and \(c_3\) are the prices of European call options w
 \[
   c_2 \leq 0.5(c_1 + c_3)
 \]
-(Hint: Consider a portfolio that is long one option with strike price \(K_1\), long one option with strike price \(K_3\), and short two optiosn with strike price \(K_2\).) \\ \\
-
+(Hint: Consider a portfolio that is long one option with strike price \(K_1\), long one option with strike price \(K_3\), and short two options with strike price \(K_2\).) \\ \\
+Using the hint, we construct a portfolio with: \\
+- 1 long \(K_1\) call \\
+- 1 long \(K_3\) call \\
+- 1 short \(K_2\) calls \\
+If we can show that the portfolio payoff is always nonnegative, then we would show that 
+\[
+  c_1 + c_3 - 2c_2 \geq 0
+\]
+\[
+  c_1 + c_3 \geq 2c_2
+\]
+\[
+  c_2 \leq 0.5(c_1 + c_3)
+\]
+which is exactly what we sought to prove. Let's show that the portfolio value is at least 0 in every single final price scenario: \\
+- \(S_T \leq K_1\): \(0 + 0 + 0 = 0 \geq 0\)  \\
+- \(K_1 < S_T \leq K_2\): \((S_T - K_1) + 0 + 0 = S_T - K_1 \geq 0\) \\
+- \(K_2 < S_T \leq K_3\): \((S_T - K_1) + 0 - 2(S_T - K_2) = S_T - K_1 - 2S_T + 2K_2 = 2K_2 - K_1 - S_T = (K_2 - K_1) + (K_2 - S_T)\), both elements \(\geq 0\), so the overall portfolio value is still nonnegative. \\
+- \(K_3 < S_T\): \((S_T - K_1) + (S_T - K_3) - 2(S_T - K_2) = S_T - K_1 + S_T - K_3 - 2S_T + 2K_2 = 2K_2 - K_1 - K_3 = (K_2 - K_1) + (K_2 - K_3)\). Using the knowledge of the strike prices being equally spaced, we see that these two terms cancel out since we have one positive and one negative instance of the equal spacing terms, so the overall portfolio value is \(0 \geq 0\). \\ \\
+We therefore have shown that this portfolio value is nonnegative, which allows us to draw the original conclusion about the call prices as we expected. 
 
 }
 {\Large 
@@ -198,16 +217,64 @@ Suppose that \(c_1, c_2,\) and \(c_3\) are the prices of European call options w
 Consider an option on a stock when the stock price is \$41, the strike price of \$40, the risk-free rate is 6\%, the volatility is 35\%,and the time to maturity is 1 year. Assume that a dividend of \$0.50 is expected after six months. 
 
 \subsection*{(a)} 
-Use DerivaGem to value the option assuming it is a European call. \\ \\
+Use DerivaGem to value the option assuming it is a European call.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{derivagem_a.png}
+\end{figure} \\ \\ \\ \\ \\ \\ \\
+The price is \(\$6.96862981 \approx \boxed{\textbf{\$6.97}}\).
 
 \subsection*{(b)}
-Use DerivaGem to value the option assuming it is a European put. \\ \\
+Use DerivaGem to value the option assuming it is a European put.\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{derivagem_b.png}
+\end{figure} \\
+The price is \(\$4.12443392 \approx \boxed{\textbf{\$4.12}}\).
 
 \subsection*{(c)}
 Verify that put-call parity holds. \\ \\
+We solve accordingly:
+\[
+  c + D + Ke^{-rT} = p + S_0
+\]
+\[
+  6.97 + 0.5e^{-0.06 \cdot \frac{6}{12}} + 40e^{-0.06 \cdot 1} = 4.12 + 41
+\]
+\[
+  6.97 + 0.5e^{-0.03} + 40e^{-0.03} = 45.12
+\]
+\[
+  6.97 + 0.48522276677 + 37.6705813432 = 45.12
+\]
+\[
+  45.12580411 \approx 45.13 = 45.12
+\]
+So these values are very close to the same, which shows that the put-call parity does indeed hold. 
+
 
 \subsection*{(d)}
 Explore using DerivaGem what happens to the price of the options as the time to maturity becomes very large and there are no dividends. Explain your results. \\ \\
+I upped the maturity to an absurd amount (100). For the call:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=370pt]{derivagem_d_call.png}
+\end{figure} \\ \\
+The price of the call asymptotically approaches the stock price as the time to maturity becomes very large. This makes sense as with no dividends, the concept of buying the call becomes almost identical to owning the stock because you can theoretically indefinitely delay paying the strike price, while giving up nothing in terms of dividends. So essentially, it makes sense that essentially \(C = S_0\). 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=370pt]{derivagem_d_put.png}
+\end{figure} \\
+The price of the put continues to decrease and goes to zero as the time to maturity becomes very large. This makes sense because as the maturity extends with no dividends, there is no benefit to owning the stock early, so the value of the call essentially approaches the current stock price, while the strike payment gets essentially discounted to 0. Using put-call parity, this indicates that
+\[
+  c + D + Ke^{-rT} = p + S_0
+\]
+\[
+  S_0 + 0 + 0 = p + S_0
+\]
+\[
+  p = 0
+\]
+which confirms the empirical result.
 
 }
 
