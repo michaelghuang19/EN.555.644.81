@@ -1,0 +1,281 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework 8
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{11.12}
+The price of a non-dividend paying stock is \$19 and the price of a three-month European call option on the stock with a strike price of \$20 is \$1. The risk-free rate is 4\% per annum. What
+is the price of a three-month European put option with a strike price of \$20? \\ \\
+According to put-call parity:
+\[
+  c + D + Ke^{(-rT)} = p + S_0
+\]
+\[
+  1 + 0 + 20e^{(-0.04 \cdot \frac{3}{12})} = p + 19
+\]
+\[
+  p = 1 + 20e^{-0.01} - 19
+\]
+\[
+  p = 20 \cdot 0.99004983374 - 18 = 19.8009966748 - 18 = 1.8009966748 \approx \boxed{\textbf{\$1.80}}
+\]
+
+
+}
+{\Large 
+
+\section*{11.19}
+The price of a European call that expires in six months and has a strike price of \$30 is \$2. The underlying stock price is \$29, and a dividend of \$0.50 is expected in two months and again in five months. Interest rates (all maturities) are 10\%. What is the price of a European put option that expires in six months and has a strike price of \$30?
+\[
+  c + D + Ke^{(-rT)} = p + S_0
+\]
+\[
+  2 + 0.50(e^{-0.10 \cdot \frac{2}{12}} + e^{-0.10 \cdot \frac{5}{12}}) + 30e^{(-0.10 \cdot \frac{6}{12})} = p + 29
+\]
+\[
+  p = 2 + 0.50(0.98347145382 + 0.95918945711) + 30e^{-0.05 } - 29
+\]
+\[
+  p = 2 + 0.97133045546 + 28.536882735 - 29
+\]
+\[
+  p = 2.50821319046 \approx \boxed{\textbf{\$2.51}}
+\]
+
+}
+{\Large 
+
+\section*{11.20}
+Explain the arbitrage opportunities in Problem 11.19 if the European put price is \$3. \\ \\
+We found in Problem 11.19 that the fair put price should be \$2.51, so if this price is actually \$3, then there is an arbitrage opportunity with the put being overpriced and the call being underpriced. We can therefore \boxed{\textbf{short both the put and underlying stock}}, and then also \boxed{\textbf{buy the call}}. We first immediately make -2 + 3 + 29 = \$30, and we would then profit in the corresponding scenarios for the final stock price: \\
+- If the stock price is above \$30, we exercise the call option and buy the stock for \$30, or with PV \(30e^{-0.10 \cdot \frac{6}{12}} = 30 \cdot 0.9512294245 = 28.536882735 \approx 28.54\), and the dividends on the short cost \(0.50(e^{-0.10 \cdot \frac{2}{12}} + e^{-0.10 \cdot \frac{5}{12}}) = 0.50(0.98347145382 + 0.95918945711) = 0.97133045546 \approx 0.97\), so we end up with a PV-adjusted profit of 30 - 28.54 - 0.97 = \$0.49, which is exactly the difference in the put price. \\
+- If the stock price is below \$30, the put we shorted is exercised, so we are still forced to buy the stock for \$30, with the same PV calculation of before as 28.54. We still are short the stock, so we pay the same 0.97 dividend as before. The profit is therefore the same \$0.49 as before. 
+
+}
+{\Large 
+
+\section*{11.23}
+Prove the result in equation (11.7). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal to K and (b) a portfolio consisting of an American put option plus one share.) \\ \\
+We aim to prove that with no dividends, 
+\[
+  S_0 - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+With an American call, it is never optimal to exercise it early for a non-dividend-paying stock, so we have \(C = c\). Using put-call parity, we therefore have 
+\[
+  c + Ke^{-rT} = p + S_0
+\]
+\[
+  c - p = S_0 - Ke^{-rT}
+\]
+We know that an American put is always worth more than a European put because of its flexible exercise timing, and as \(C = c\), we have that 
+\[
+  C - P \leq c - p = S_0 - Ke^{-rT}
+\]
+\[
+  C - P \leq S_0 - Ke^{-rT}
+\]
+which is the second inequality. \\
+Looking at the first inequality, we consider the portfolios mentioned in the hint: \\
+(a) a portfolio consisting of a European call plus an amount of cash equal to K \\
+(b) a portfolio consisting of an American put option plus one share \\
+Assuming both options have the same exercise price and expiration date, if the put option is not exercised early, the American portfolio is worth \(\max(S_T, K)\), while the European portfolio with the cash invested at the risk-free rate is worth \(\max(S_T - K, 0) + Ke^{rT} = \max(S_T, K) - K + Ke^{rT} \geq \max(S_T, K)\). \\
+If the put is indeed exercised early, though, then the American portfolios is worth \(K\), while the European portfolio is worth at least $Ke^{rT} \geq K$. So in both cases, the European portfolio is worth at least as much as the American portfolio. In other words, \(c + K \geq P + S_0\), and as we stated previously, \(C = c\), so we have 
+\[ 
+  C + K \geq P + S_0
+\]
+\[ 
+  C - P \geq S_0 - K
+\]
+which combining with the first part of the proof, we come to our desired conclusion that
+\[
+  S_0 - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+
+}
+{\Large 
+
+\section*{11.24}
+Prove the result in equation (11.11). (Hint: For the first part of the relationship consider (a) a portfolio consisting of a European call plus an amount of cash equal to D + K and (b) a portfolio consisting of an American put option plus one share.) \\ \\
+We aim to prove that with dividends, 
+\[
+  S_0 - D - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+We repeat the same process as above -- starting with the right-hand inequality, we have the result of \(C-P \leq S_0-Ke^{-rT}\) as previously found with the no dividends. Introducing dividends causes the stock price to decrease, which leads the call price \(C\) to decrease put price \(P\) to increase, so \(C - P\) only decreases overall, so this inequality still holds. \\ \\
+We now move on to the first inequality, again considering the portfolios mentioned in the hint: \\
+(a) a portfolio consisting of a European call plus an amount of cash equal to D + K \\
+(b) a portfolio consisting of an American put option plus one share \\
+Assuming again the same exercise price and expiration date, if the put is not exercised early, the American portfolio is worth \(\max(S_T, K) + De^{rT}\) with the additional dividends invested at the risk-free rate now. The European portfolio would be worth \(\max(S_T - K, 0) + (D + K)e^{rT} = \max(S_T, K) + De^{rT} + Ke^{rT} - K\), and we can clearly see that \(\max(S_T, K) + De^{rT} + Ke^{rT} - K \geq \max(S_T, K) + De^{rT}\). \\
+If the put is exercised early, then we now have that the American portfolio is worth at most \(K + De^{rT}\) with the strike price and dividend reinvestment, while the European portfolio has the cash reinvested, so it has value of at least \((D + K)e^{rT}\), so the cash part of the European portfolio itself already has value greater than the upper bound value of the American portfolio. We can therefore conclude that \(c + D + K \geq P + S_0\), and with \(C \geq c\) now with dividends, we have that 
+\[
+  C + D + K \geq P + S_0
+\]
+\[
+  C - P \geq S_0 - D - K
+\]
+Finally, combining with the second part of the inequality which we evaluated first, we indeed find that 
+\[
+  S_0 - D - K \leq C - P \leq S_0 - Ke^{-rT}
+\]
+
+}
+{\Large 
+
+\section*{11.26}
+Use the software DerivaGem to verify that Figures 11.1 and 11.2 are correct. \\
+The textbook Figure 11.1: 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{textbook_11_1.png}
+\end{figure}
+Using DerivaGem, we create the corresponding figures that match up with Figure 11.1 above, although with slightly differently scaled axes:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_a.png}
+  \includegraphics[width=250pt]{derivagem_11_1_b.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_c.png}
+  \includegraphics[width=250pt]{derivagem_11_1_d.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_1_e.png}
+  \includegraphics[width=250pt]{derivagem_11_1_f.png}
+\end{figure} \\ \\ \\ \\ \\ \\ \\ \\ \\
+Now, the textbook Figure 11.2:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{textbook_11_2.png}
+\end{figure} \\ 
+In the same way, using DerivaGem, we create the corresponding figures that match up with Figure 11.2 above, although also with slightly differently scaled axes:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_2_a.png}
+  \includegraphics[width=250pt]{derivagem_11_2_b.png}
+\end{figure}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=250pt]{derivagem_11_2_c.png}
+  \includegraphics[width=250pt]{derivagem_11_2_d.png}
+\end{figure} \\ \\
+All these DerivaGem-sourced figures match the textbook figures pretty well. 
+
+}
+{\Large 
+
+\section*{11.31}
+Suppose that \(c_1, c_2,\) and \(c_3\) are the prices of European call options with strike prices \(K_1, K_2,\) and \(K_3\), respectively, where \(K_3 > K_2 > K_1\) and \(K_3 - K_2 = K_2 - K_1\). All options have the same maturity. Show that 
+\[
+  c_2 \leq 0.5(c_1 + c_3)
+\]
+(Hint: Consider a portfolio that is long one option with strike price \(K_1\), long one option with strike price \(K_3\), and short two options with strike price \(K_2\).) \\ \\
+Using the hint, we construct a portfolio with: \\
+- 1 long \(K_1\) call \\
+- 1 long \(K_3\) call \\
+- 1 short \(K_2\) calls \\
+If we can show that the portfolio payoff is always nonnegative, then we would show that 
+\[
+  c_1 + c_3 - 2c_2 \geq 0
+\]
+\[
+  c_1 + c_3 \geq 2c_2
+\]
+\[
+  c_2 \leq 0.5(c_1 + c_3)
+\]
+which is exactly what we sought to prove. Let's show that the portfolio value is at least 0 in every single final price scenario: \\
+- \(S_T \leq K_1\): \(0 + 0 + 0 = 0 \geq 0\)  \\
+- \(K_1 < S_T \leq K_2\): \((S_T - K_1) + 0 + 0 = S_T - K_1 \geq 0\) \\
+- \(K_2 < S_T \leq K_3\): \((S_T - K_1) + 0 - 2(S_T - K_2) = S_T - K_1 - 2S_T + 2K_2 = 2K_2 - K_1 - S_T = (K_2 - K_1) + (K_2 - S_T)\), both elements \(\geq 0\), so the overall portfolio value is still nonnegative. \\
+- \(K_3 < S_T\): \((S_T - K_1) + (S_T - K_3) - 2(S_T - K_2) = S_T - K_1 + S_T - K_3 - 2S_T + 2K_2 = 2K_2 - K_1 - K_3 = (K_2 - K_1) + (K_2 - K_3)\). Using the knowledge of the strike prices being equally spaced, we see that these two terms cancel out since we have one positive and one negative instance of the equal spacing terms, so the overall portfolio value is \(0 \geq 0\). \\ \\
+We therefore have shown that this portfolio value is nonnegative, which allows us to draw the original conclusion about the call prices as we expected. 
+
+}
+{\Large 
+
+\section*{.}
+Consider an option on a stock when the stock price is \$41, the strike price of \$40, the risk-free rate is 6\%, the volatility is 35\%,and the time to maturity is 1 year. Assume that a dividend of \$0.50 is expected after six months. 
+
+\subsection*{(a)} 
+Use DerivaGem to value the option assuming it is a European call.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{derivagem_a.png}
+\end{figure} \\ \\ \\ \\ \\ \\ \\
+The price is \(\$6.96862981 \approx \boxed{\textbf{\$6.97}}\).
+
+\subsection*{(b)}
+Use DerivaGem to value the option assuming it is a European put.\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{derivagem_b.png}
+\end{figure} \\
+The price is \(\$4.12443392 \approx \boxed{\textbf{\$4.12}}\).
+
+\subsection*{(c)}
+Verify that put-call parity holds. \\ \\
+We solve accordingly:
+\[
+  c + D + Ke^{-rT} = p + S_0
+\]
+\[
+  6.97 + 0.5e^{-0.06 \cdot \frac{6}{12}} + 40e^{-0.06 \cdot 1} = 4.12 + 41
+\]
+\[
+  6.97 + 0.5e^{-0.03} + 40e^{-0.03} = 45.12
+\]
+\[
+  6.97 + 0.48522276677 + 37.6705813432 = 45.12
+\]
+\[
+  45.12580411 \approx 45.13 = 45.12
+\]
+So these values are very close to the same, which shows that the put-call parity does indeed hold. 
+
+
+\subsection*{(d)}
+Explore using DerivaGem what happens to the price of the options as the time to maturity becomes very large and there are no dividends. Explain your results. \\ \\
+I upped the maturity to an absurd amount (100). For the call:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=370pt]{derivagem_d_call.png}
+\end{figure} \\ \\
+The price of the call asymptotically approaches the stock price as the time to maturity becomes very large. This makes sense as with no dividends, the concept of buying the call becomes almost identical to owning the stock because you can theoretically indefinitely delay paying the strike price, while giving up nothing in terms of dividends. So essentially, it makes sense that essentially \(C = S_0\). 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=370pt]{derivagem_d_put.png}
+\end{figure} \\
+The price of the put continues to decrease and goes to zero as the time to maturity becomes very large. This makes sense because as the maturity extends with no dividends, there is no benefit to owning the stock early, so the value of the call essentially approaches the current stock price, while the strike payment gets essentially discounted to 0. Using put-call parity, this indicates that
+\[
+  c + D + Ke^{-rT} = p + S_0
+\]
+\[
+  S_0 + 0 + 0 = p + S_0
+\]
+\[
+  p = 0
+\]
+which confirms the empirical result.
+
+}
+
+\end{document}
