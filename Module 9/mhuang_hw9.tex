@@ -1,0 +1,76 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework N
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{1}
+A stock price is currently \$40. It is known that at the end of one month it will be either \$42 or \$38. The risk-free interest rate is 8\% per annum with continuous compounding. What is the value of a one-month European call option with a strike price of \$39?
+
+
+}
+{\Large 
+
+\section*{2}
+A stock price is currently \$100. Over each of the next two six-month periods it is expected to go up by 10\% or down by 10\%. The risk-free interest rate is 8% per annum with continuous
+compounding. What is the value of a one-year European call option with a strike price of \$100?
+
+
+}
+{\Large 
+
+\section*{3}
+For the situation considered in Problem 2, what is the value of a one-year European put option with a strike price of \$100? Verify that the European call and European put prices satisfy put-call parity.
+
+
+}
+{\Large 
+
+\section*{4}
+A stock price is currently \$40. It is known that at the end of three months it will be either \$45 or \$35. The risk-free rate of interest with quarterly compounding is 8\% per annum. Calculate the value of a three-month European put option on the stock with an exercise price of \$40. Verify that no-arbitrage arguments and risk-neutral valuation arguments give the same answers.
+
+
+}
+{\Large 
+
+\section*{5}
+
+Consider a European call option on a non-dividend-paying stock where the stock price is \$40, the strike price is \$40, the risk-free rate is 4\% per annum, the volatility is 30\% per annum, and the time to maturity is six months.
+
+\subsection*{(a)} 
+Calculate \(u, d\), and \(p\) for a two step tree
+
+
+\subsection*{(b)}
+Value the option using a two step tree.
+
+
+\subsection*{(c)}
+Verify that DerivaGem gives the same answer.
+
+
+\subsection*{(d)}
+Use DerivaGem to value the option with 5, 50, 100, and 500 time steps. 
+
+
+}
+
+\end{document}
