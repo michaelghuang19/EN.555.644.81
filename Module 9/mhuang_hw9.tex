@@ -63,7 +63,7 @@ In this case, we have \(u = 1.10, d = 0.90, \Delta t = 0.5, r = 0.08\). We set u
 \end{figure} \\
 We know that 
 \[
-  p = \frac{e^{r \Delta t - d}}{u - d}
+  p = \frac{e^{r \Delta t} - d}{u - d}
 \]
 \[
   p = \frac{e^{0.08 \cdot 0.5} - 0.9}{1.10 - 0.90}
@@ -132,8 +132,54 @@ which indeed shows us that put-call parity does hold!
 {\Large 
 
 \section*{4}
-A stock price is currently \$40. It is known that at the end of three months it will be either \$45 or \$35. The risk-free rate of interest with quarterly compounding is 8\% per annum. Calculate the value of a three-month European put option on the stock with an exercise price of \$40. Verify that no-arbitrage arguments and risk-neutral valuation arguments give the same answers.
-
+A stock price is currently \$40. It is known that at the end of three months it will be either \$45 or \$35. The risk-free rate of interest with quarterly compounding is 8\% per annum. Calculate the value of a three-month European put option on the stock with an exercise price of \$40. Verify that no-arbitrage arguments and risk-neutral valuation arguments give the same answers. \\ \\
+We set up a portfolio with \(\Delta\) shares and 1 option, which works in this case since we are working with a put option, which is essentially negative. So we know that the value of the portfolio would be the following in each situation: \\
+- If the price becomes \$45: \(45\Delta\) \\
+- If the price becomes \$35: \(35\Delta - 5\)\\
+As the portfolio is riskless when these are equal, we have 
+\[
+  45\Delta = 35\Delta - 5
+\]
+\[
+  10\Delta = - 5
+\]
+\[
+  \Delta = -0.5
+\]
+So the riskless portfolio is essentially short 0.5 shares and longing 1 put option. We see that the value of the portfolio is \(45 \cdot -0.5 = -22.5\). Discounting at the risk-free rate over the 3 months, we can solve for \(f\) accordingly:
+\[
+  (-0.5 \cdot 40 + f) \cdot (1 + 0.08 \cdot \frac{3}{12}) = -22.5
+\]
+\[
+  (-20 + f) \cdot 1.02 = -22.5
+\]
+\[
+  -20 + f = -22.0588235294
+\]
+\[
+  f = 2.0588235294 \approx \boxed{\textbf{\$2.06}}
+\]
+We confirm this using the risk-neutral valuation argument:
+\[
+  45p + 35(1 - p) = 40 \cdot (1 + 0.08 \cdot \frac{3}{12})
+\]
+\[
+  45p + 35 - 35p = 40 \cdot 1.02
+\]
+\[
+  10p = 40.8 - 35
+\]
+\[
+  p = 0.58
+\]
+So the expected value of the option is 
+\[
+  0.58 \cdot 0 + (1 - 0.58) \cdot 5
+\]
+\[
+  = 0 + 0.42 \cdot 5 = 2.10
+\]
+and adjusting for present value is \(2.10 \div 1.02 = 2.05882352941 \approx 2.06\), which is consistent with what we previously found using the no-arbitrage argument.
 
 }
 {\Large 
@@ -143,12 +189,51 @@ A stock price is currently \$40. It is known that at the end of three months it 
 Consider a European call option on a non-dividend-paying stock where the stock price is \$40, the strike price is \$40, the risk-free rate is 4\% per annum, the volatility is 30\% per annum, and the time to maturity is six months.
 
 \subsection*{(a)} 
-Calculate \(u, d\), and \(p\) for a two step tree
-
+Calculate \(u, d\), and \(p\) for a two step tree \\ \\
+We do a two step tree over six months, so we have \(\Delta t = 0.5 \div 2 = 0.25\). We therefore have 
+\[
+  u = e^{0.3 \cdot \sqrt{0.25}} = e ^ {0.15} = 1.16183424273
+\]
+and 
+\[
+  d = \frac{1}{u} = \frac{1}{1.16183424273} = 0.86070797642
+\]
+Finally:
+\[
+  p = \frac{e^{r \Delta t} - d}{u - d}
+\]
+\[
+  = \frac{e^{0.04 \cdot 0.25} - 0.86070797642}{1.16183424273 - 0.86070797642}
+\]
+\[
+  p = \frac{e^{0.01} - 0.86070797642}{0.30112626631} = \frac{0.14934219066}{0.30112626631} = 0.49594541349
+\]
 
 \subsection*{(b)}
 Value the option using a two step tree.
-
+We fill in the tree using the values we found in part \(a\), with the prices on the tree as follows: \\
+- \(S_{u} = 40u = 40 \cdot 1.16183424273 = 46.4733697092\) \\
+- \(S_{uu} = 40u^2 = 40 \cdot 1.16183424273^2 = 53.9943523032\) \\
+- \(S_{ud} = S_{du} = 40du = 40 \cdot 1.16183424273 \cdot 0.86070797642 = 39.9999999998 \approx 40 \) \\
+- \(S_{d} = 40d = 40 \cdot 0.86070797642 = 34.4283190568\) \\
+- \(S_{dd} = 40d^2 = 40 \cdot 0.86070797642^2 = 29.6327288268\) \\
+And the corresponding \(f\) values: \\
+\[
+  f_u = e^{-0.04 \cdot \frac{1}{2} \div 2} \cdot [(0.49594541349 \cdot 13.9943523032) + (1 - 0.49594541349) \cdot 0]
+\]
+\[
+  = e^{-0.01} \cdot (0.49594541349 \cdot 13.9943523032)
+\]
+\[
+  f_u = 0.99004983374 \cdot 6.94043483954 = 6.87137635897
+\]
+and 
+\[
+  f = e^{-0.04 \cdot \frac{1}{2} \div 2} \cdot [(0.49594541349 \cdot 6.87137635897) + (1 - 0.49594541349) \cdot 0]
+\]
+\[
+  f = 0.99004983374 \cdot 3.40782758959 = 3.37391913849 \approx \boxed{\textbf{\$3.37}}
+\]
 
 \subsection*{(c)}
 Verify that DerivaGem gives the same answer.
