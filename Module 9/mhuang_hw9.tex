@@ -1,0 +1,272 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework N
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{1}
+A stock price is currently \$40. It is known that at the end of one month it will be either \$42 or \$38. The risk-free interest rate is 8\% per annum with continuous compounding. What is the value of a one-month European call option with a strike price of \$39? \\ \\
+Following the way that we set up the portfolios in the text, we consider a portfolio with \(\Delta\) shares of a stock and short 1 call option with the specification as in the problem. The portfolio value would be the following in each situation: \\
+- If the price becomes \$42: \(42\Delta - 3\) \\
+- If the price becomes \$38: \(38\Delta\) \\
+As the portfolio is riskless when these are equal, we have 
+\[
+  42\Delta - 3 = 38\Delta
+\]
+\[
+  4\Delta = 3
+\]
+\[
+  \Delta = 0.75
+\]
+So the riskless portfolio is longing 0.75 shares and shorting 1 call option. The current value of the portfolio is therefore \(38 \cdot 0.75 = 28.5\), so with discounting at the risk-free rate over a month, we have
+\[
+  (0.75 \cdot 40 - f)e^{0.08 \cdot \frac{1}{12}} = 28.5
+\]
+\[
+  (30 - f)e^{\frac{1}{150}} = 28.5
+\]
+\[
+  30 - f = 28.3106319284
+\]
+\[
+  f = 1.6893680716 \approx \boxed{\textbf{\$1.69}}
+\]
+
+}
+{\Large 
+
+\section*{2}
+A stock price is currently \$100. Over each of the next two six-month periods it is expected to go up by 10\% or down by 10\%. The risk-free interest rate is 8\% per annum with continuous compounding. What is the value of a one-year European call option with a strike price of \$100? \\ \\
+In this case, we have \(u = 1.10, d = 0.90, \Delta t = 0.5, r = 0.08\). We set up the tree like so:
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{2_tree.png}
+\end{figure} \\
+We know that 
+\[
+  p = \frac{e^{r \Delta t} - d}{u - d}
+\]
+\[
+  p = \frac{e^{0.08 \cdot 0.5} - 0.9}{1.10 - 0.90}
+\]
+\[
+  p = \frac{e^{0.04} - 0.9}{0.2}
+\]
+\[
+  p = \frac{0.14081077419}{0.2} = 0.70405387095
+\]
+We use this to work backwards in the tree. First step: \\ 
+\[
+  f_u = e^{-0.08 \cdot 0.5} \cdot ((0.70405387095 \cdot 21) + ((1 - 0.70405387095) \cdot 0))
+\]
+\[
+  = e^{-0.04} \cdot 14.78513129 = 14.2053979999
+\]
+And last step to the beginning: 
+\[
+  f = e^{-0.08 \cdot 0.5} \cdot ((0.70405387095 \cdot 14.2053979999) + ((1 - 0.70405387095) \cdot 0))
+\]
+\[
+  = e^{-0.04} \cdot 10.0013654502 = 9.60920630163 \approx \boxed{\textbf{\$9.61}}
+\]
+
+
+}
+{\Large 
+
+\section*{3}
+For the situation considered in Problem 2, what is the value of a one-year European put option with a strike price of \$100? Verify that the European call and European put prices satisfy put-call parity. \\ \\
+With the same setup as above, we can recreate the tree or just calculate the option value directly:
+\[
+  f = e^{-r\Delta t} [pf_{u} + (1 - p)f_{d}]
+\]
+\[
+  = e^{-2r\Delta t} [p^2f_{uu} + 2p(1 - p)f_{ud} + (1-p)^2f_{dd}]
+\]
+\(= e^{-2 \cdot 0.08 \cdot 0.5} [0.70405387095 \cdot 0 + 2 \cdot 0.70405387095 \cdot (1 - 0.70405387095) \cdot 1 + (1 - 0.70405387095)^2 \cdot 19]
+\)
+\[
+  = e^{-0.08} [2 \cdot 0.70405387095 \cdot 0.29594612905 + 0.29594612905^2 \cdot 19]
+\]
+\[
+  = 0.92311634638 \cdot (0.4167240355 + 1.66409811451)
+\]
+\[
+  = 1.92084094058 \approx \boxed{\textbf{\$1.92}}
+\]
+Put-call parity tells us that 
+\[
+  c + Ke^{-rT} = p + S_0
+\]
+\[
+  9.61 + 100e^{-0.08 \cdot 1} = 1.92 + 100
+\]
+\[
+  9.61 + 92.311634638 = 101.92
+\]
+\[
+  101.921634638 \approx 101.92 = 101.92
+\]
+which indeed shows us that put-call parity does hold!
+
+}
+{\Large 
+
+\section*{4}
+A stock price is currently \$40. It is known that at the end of three months it will be either \$45 or \$35. The risk-free rate of interest with quarterly compounding is 8\% per annum. Calculate the value of a three-month European put option on the stock with an exercise price of \$40. Verify that no-arbitrage arguments and risk-neutral valuation arguments give the same answers. \\ \\
+We set up a portfolio with \(\Delta\) shares and 1 option, which works in this case since we are working with a put option, which is essentially negative. So we know that the value of the portfolio would be the following in each situation: \\
+- If the price becomes \$45: \(45\Delta\) \\
+- If the price becomes \$35: \(35\Delta - 5\)\\
+As the portfolio is riskless when these are equal, we have 
+\[
+  45\Delta = 35\Delta - 5
+\]
+\[
+  10\Delta = - 5
+\]
+\[
+  \Delta = -0.5
+\]
+So the riskless portfolio is essentially short 0.5 shares and longing 1 put option. We see that the value of the portfolio is \(45 \cdot -0.5 = -22.5\). Discounting at the risk-free rate over the 3 months, we can solve for \(f\) accordingly:
+\[
+  (-0.5 \cdot 40 + f) \cdot (1 + 0.08 \cdot \frac{3}{12}) = -22.5
+\]
+\[
+  (-20 + f) \cdot 1.02 = -22.5
+\]
+\[
+  -20 + f = -22.0588235294
+\]
+\[
+  f = 2.0588235294 \approx \boxed{\textbf{\$2.06}}
+\]
+We confirm this using the risk-neutral valuation argument:
+\[
+  45p + 35(1 - p) = 40 \cdot (1 + 0.08 \cdot \frac{3}{12})
+\]
+\[
+  45p + 35 - 35p = 40 \cdot 1.02
+\]
+\[
+  10p = 40.8 - 35
+\]
+\[
+  p = 0.58
+\]
+So the expected value of the option is 
+\[
+  0.58 \cdot 0 + (1 - 0.58) \cdot 5
+\]
+\[
+  = 0 + 0.42 \cdot 5 = 2.10
+\]
+and adjusting for present value is \(2.10 \div 1.02 = 2.05882352941 \approx 2.06\), which is consistent with what we previously found using the no-arbitrage argument.
+
+}
+{\Large 
+
+\section*{5}
+
+Consider a European call option on a non-dividend-paying stock where the stock price is \$40, the strike price is \$40, the risk-free rate is 4\% per annum, the volatility is 30\% per annum, and the time to maturity is six months.
+
+\subsection*{(a)} 
+Calculate \(u, d\), and \(p\) for a two step tree \\ \\
+We do a two step tree over six months, so we have \(\Delta t = 0.5 \div 2 = 0.25\). We therefore have 
+\[
+  u = e^{0.3 \cdot \sqrt{0.25}} = e ^ {0.15} = \boxed{\textbf{1.16183424273}}
+\]
+and 
+\[
+  d = \frac{1}{u} = \frac{1}{1.16183424273} = \boxed{\textbf{0.86070797642}}
+\]
+Finally:
+\[
+  p = \frac{e^{r \Delta t} - d}{u - d}
+\]
+\[
+  = \frac{e^{0.04 \cdot 0.25} - 0.86070797642}{1.16183424273 - 0.86070797642}
+\]
+\[
+  p = \frac{e^{0.01} - 0.86070797642}{0.30112626631} = \frac{0.14934219066}{0.30112626631} = \boxed{\textbf{0.49594541349}}
+\]
+
+\subsection*{(b)}
+Value the option using a two step tree.
+We fill in the tree using the values we found in part \(a\), with the prices on the tree as follows: \\
+- \(S_{u} = 40u = 40 \cdot 1.16183424273 = 46.4733697092\) \\
+- \(S_{uu} = 40u^2 = 40 \cdot 1.16183424273^2 = 53.9943523032\) \\
+- \(S_{ud} = S_{du} = 40du = 40 \cdot 1.16183424273 \cdot 0.86070797642 = 39.9999999998 \approx 40 \) \\
+- \(S_{d} = 40d = 40 \cdot 0.86070797642 = 34.4283190568\) \\
+- \(S_{dd} = 40d^2 = 40 \cdot 0.86070797642^2 = 29.6327288268\) \\
+And the corresponding \(f\) values: \\
+\[
+  f_u = e^{-0.04 \cdot \frac{1}{2} \div 2} \cdot [(0.49594541349 \cdot 13.9943523032) + (1 - 0.49594541349) \cdot 0]
+\]
+\[
+  = e^{-0.01} \cdot (0.49594541349 \cdot 13.9943523032)
+\]
+\[
+  f_u = 0.99004983374 \cdot 6.94043483954 = 6.87137635897
+\]
+and 
+\[
+  f = e^{-0.04 \cdot \frac{1}{2} \div 2} \cdot [(0.49594541349 \cdot 6.87137635897) + (1 - 0.49594541349) \cdot 0]
+\]
+\[
+  f = 0.99004983374 \cdot 3.40782758959 = 3.37391913849 \approx \boxed{\textbf{\$3.37}}
+\]
+
+\subsection*{(c)}
+Verify that DerivaGem gives the same answer. \\ \\ \\ \\ \\ \\ \\ \\ \\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{5_c_tree.png}
+\end{figure} \\
+Looking at the DerivaGem tree, we do indeed see that we have the same price for the option. \\ \\ \\ \\ \\ \\ \\
+
+\subsection*{(d)}
+Use DerivaGem to value the option with 5, 50, 100, and 500 time steps. 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{5_d_5_tree.png}
+\end{figure} \\
+We have that the price with 5 steps is approximately \boxed{\textbf{\$3.92}}. 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{5_d_50.png}
+\end{figure} \\
+We have that the price with 50 steps is approximately \boxed{\textbf{\$3.74}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{5_d_100.png}
+\end{figure} \\ \\ 
+We have that the price with 100 steps is also approximately \boxed{\textbf{\$3.74}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=300pt]{5_d_500.png}
+\end{figure} \\
+We have that the price with 500 steps is also approximately \boxed{\textbf{\$3.74}}.
+
+
+}
+
+\end{document}
