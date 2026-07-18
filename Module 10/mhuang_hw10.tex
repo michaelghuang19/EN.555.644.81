@@ -24,6 +24,25 @@
 
 \section*{14.2}
 A company's cash position, measured in millions of dollars, follows a generalized Wiener process with a drift rate of 0.5 per quarter and a variance rate of 4.0 per quarter. How high does the company's initial cash position have to be for the company to have a less than 5\% chance of a negative cash position by the end of one year? \\ \\
+We have drift of 0.5 and variance of 4.0 per quarter, and we calculate over a year, so 4 quarters. The cash position therefore has a normal distribution with \(\Phi(x + a \Delta t, b^2 \Delta t) = \Phi(x + 0.5 \cdot 4, 4 \cdot 4) = \Phi(x + 2, 16)\), so to get the "less than 5\% chance of negative cash position", we simply need to calculate 
+\[
+  N(-\frac{x + 2}{\sqrt{16}}) = 0.05
+\]
+\[
+  N(-\frac{x + 2}{4}) = 0.05
+\]
+Looking up in a z score table, taking the approximation:
+\[
+  -\frac{x + 2}{4} = -1.64
+\]
+\[
+  x + 2 = 6.56
+\]
+\[
+  x = 4.56
+\]
+So the company's initial cash position would have to be approximately \boxed{\textbf{\$4.56 million}}
+
 
 }
 {\Large 
@@ -33,8 +52,8 @@ Consider a variable, \(S\), that follows the process
 \[
   dS = \mu dt + \sigma dz
 \]
-For the first three years, \(\mu = 2\) and \(\mu = 3\); for the next three years, \(\mu = 3\) and \(\sigma = 4\). If the initial value of the variable is 5, what is the probability distribution of the value of the variable at the end of year six? \\ \\
-
+For the first three years, \(\mu = 2\) and \(\sigma = 3\); for the next three years, \(\mu = 3\) and \(\sigma = 4\). If the initial value of the variable is 5, what is the probability distribution of the value of the variable at the end of year six? \\ \\
+For the first three years, we have a normal distribution of \(\Phi(2 \cdot 3, 3^2 \cdot 3) = \Phi(6, 27)\); for the next three years, we have a normal distribution of \(\Phi(3 \cdot 3, 4^2 \cdot 3) = \Phi(9, 48)\). Due to the nature of the normal distribution, with the non-overlapping time intervals, we can find the total change by simply taking the sum of the independent normal random variables, so the total change is therefore \(\Phi(6 + 9, 27 + 48) = \Phi(15, 75)\). With the initial value, we therefore have a final probability distribution of \(\Phi(5 + 15, 75) = \boxed{\mathbf{\Phi(20, 75)}}\).
 
 }
 {\Large 
@@ -56,6 +75,24 @@ Suppose that \(x\) is the yield to maturity with continuous compounding on a zer
   dx = a(x_0 - x)dt + sx dz
 \]
 where \(a, x_0\), and \(s\) are positive constants and \(dz\) is a Wiener process. What is the process followed by the bond price? \\ \\
+To determine the process for calculating the bond price \(P\), we first use the formula for the price of a zero-coupon bond with continuous discounting, which gets us \(P(x, t) = e^{-x(T - t)}\). As \(P\) is a function of the stochastic variable \(x\) and time \(t\), we can use Ito's Lemma here. We start by computing the corresponding partial derivatives: \\
+- \(\frac{\partial P}{\partial x} = e^{-x(T-t)} \cdot -(T-t) = -(T-t)P(x, t)\) \\
+- \(\frac{\partial P}{\partial t} = e^{-x(T-t)} \cdot x = x P(x, t)\) \\
+- \(\frac{\partial^2 P}{\partial x^2} = e^{-x(T-t)} \cdot -(T-t) \cdot -(T-t) = (T-t)^2 e^{-x(T-t)} = (T - t)^2 P(x,t)\) \\
+which we plug into the equation from Ito's Lemma, applied to our \(dx\):
+\[
+  dP = [\frac{\partial P}{\partial x} a + \frac{\partial P}{\partial t} + \frac{1}{2} \frac{\partial^2 P}{\partial x^2} b^2]dt + \frac{\partial P}{\partial x} b dz
+\]
+\[
+  = [\frac{\partial P}{\partial x} a(x_0 - x) + \frac{\partial P}{\partial t} + \frac{1}{2} \frac{\partial^2 P}{\partial x^2} (sx)^2]dt + \frac{\partial P}{\partial x} dx dz
+\]
+\[
+  = [-(T-t)P \cdot a(x_0 - x) + xP + \frac{1}{2} (T-t)^2 \cdot P (sx)^2]dt + -(T - t) \cdot P sx dz
+\]
+\[
+  \boxed{\mathbf{dP = [-a (x_0 - x) (T-t) + x + \frac{1}{2} s^2x^2 (T-t)^2]Pdt + -sx(T - t) P dz}}
+\]
+We could also factor out P to further simplify the evaluation of the function. 
 
 }
 {\Large 
