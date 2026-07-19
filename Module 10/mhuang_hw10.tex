@@ -64,7 +64,7 @@ It has been suggested that the short-term interest rate, \(r\), follows the stoc
   dr = a(b - r)dt + rc dz
 \]
 where \(a, b\), and \(c\) are positive constants and \(dz\) is a Wiener process. Describe the nature of this process. \\ \\
-
+From looking at the equation, we can see that the drift rate \(a\) is \(a(b-r)\) and the volatility \(b\) is \(rc\). From looking just at the drift rate, due to the \((b-r)\) component, when \(b < r\), or that the interest rate is above \(b\), we have negative drift rate, while we have positive drift rate when the opposite is true. Considering this negative/positive switchover point at \(b\), we see that the drift rate will continuously be pulled to be centered on \(b\) with a factor of \(a\). Looking at the volatility term, we see that there is a constant volatility of \(c\) applied to the change in the rate, with it then being multiplied by \(r\). Overall, we also see that the added change  in the rate due to volatility also increases as the rate is higher, and is lower when the it is lower. How severe this change is depends on the constant \(c\).
 
 }
 {\Large 
@@ -102,15 +102,45 @@ Suppose that a stock price has an expected return of 16\% per annum and a volati
 
 \subsection*{(a)} 
 The expected stock price at the end of the next day. \\ \\
-
+We know that 
+\[
+  \frac{dS}{S} = \mu dt + \sigma dz
+\]
+and we have \(\mu = 0.16, \sigma = 0.30\). We also have \(S = 50\) and \(\Delta t = \frac{1}{252}\) as we only consider trading days. Due to the nature of the Wiener process we have 
+\[
+  \frac{dS}{S} = \mu dt + \sigma dz  = \Phi(\mu \Delta t, \sigma^2 \Delta t)
+\]
+\[
+  \frac{dS}{S} = \Phi(0.16 \cdot \frac{1}{252}, 0.30^2 \cdot \frac{1}{252})
+\]
+\[
+  \frac{dS}{50} = \Phi(0.00063492063, 0.00035714285)
+\]
+\[
+  dS = \Phi(0.00063492063 \cdot 50, 0.00035714285 \cdot 50^2)
+\]
+\[
+  dS = \Phi(0.03174603174, 0.892857125)
+\]
+So \(dS\) for the next day has \(\mu = 0.03174603174\), so the next day's expected price is \(50 + 0.03174603174 = 50.03174603174 \approx\) \boxed{\textbf{\$50.03}}.
 
 \subsection*{(b)}
 The standard deviation of the stock price at the end of the next day. \\ \\
-
+According to the distribution we found in the previous part, the standard deviation is \(\sqrt{0.892857125} = \boxed{\mathbf{0.94491117307}}\).
 
 \subsection*{(c)}
 The 95\% confidence limits for the stock price at the end of the next day. \\ \\
-
+We take the 95\% CI according to the distribution:
+\[
+  [50.03 - 1.96 \cdot 0.94491117307, 50.03 + 1.96 \cdot 0.94491117307]
+\]
+\[
+  [50.02 - 1.85202589922, 50.02 + 1.85202589922]
+\]
+\[
+  [48.1679741008, 51.8720258992]
+\]
+So the 95\% confidence limits for the stock price are approximately \boxed{\textbf{[\$48.17, \$51.87]}}.
 
 }
 
