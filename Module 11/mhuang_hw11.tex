@@ -1,0 +1,121 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework N
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{15.3}
+Calculate the price of a three-month European put option on a non-dividend-paying stock with a strike price of \$50 when the current stock price is \$50, the risk-free interest rate is 10\% per annum, and the volatility is 30\% per annum. \\ \\
+
+
+}
+{\Large 
+
+\section*{15.4}
+What difference does it make to your calculations in Problem 15.3 if a dividend of \$1.50 is expected in two months? \\ \\
+
+
+}
+{\Large 
+
+\section*{15.9}
+Assume that a non-dividend-paying stock has an expected return of \(\mu\) and a volatility of \(\sigma\). An innovative financial institution has just announced that it will trade a derivative that pays off a dollar amount equal to \(\ln S_T\) at time \(T\) where \(S_T\) denotes the values of the stock price at time \(T\).
+
+\subsection*{(a)} 
+Use risk-neutral valuation to calculate the price of the derivative at time \(t\) in term of the stock price, \(S\), at time \(t\) \\ \\
+
+
+\subsection*{(b)}
+Confirm that your price satisfies the differential equation (15.16) \\ \\
+
+
+}
+{\Large 
+
+\section*{15.11}
+What is the price of a European call option on a non-dividend-paying stock when the stock price is \$52, the strike price is \$50, the risk-free interest rate is 12\% per annum, the volatility is 30\% per annum, and the time to maturity is three months? \\ \\
+
+
+}
+{\Large 
+
+\section*{15.13}
+Consider an American call option on a stock. The stock price is \$70, the time to maturity is eight months, the risk-free rate of interest is 10\% per annum, the exercise price is \$65, and the volatility is 32\%. A dividend of \$1 is expected after three months and again after six months. Show that it can never be optimal to exercise the option on either of the two dividend dates. Use DerivaGem to calculate the price of the option. \\ \\
+
+
+}
+{\Large 
+
+\section*{15.15}
+With the notation used in this chapter
+
+\subsection*{(a)}
+What is \(N'(x)\)? \\ \\
+
+
+\subsection*{(b)}
+Show that \(SN'(d_1) = Ke^{-r(T-t)}N'(d_2)\), where \(S\) is the stock price at time \(t\) 
+\[
+  d_1 = \frac{\ln(S / K) + (r + \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  d_2 = \frac{\ln(S / K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\] 
+
+
+\subsection*{(c)}
+Calculate \(\partial d_1 / \partial S\) and \(\partial d_2 / \partial S\). \\ \\
+
+
+\subsection*{(d)}
+Show that when 
+\[
+  c = SN(d_1) - Ke^{-r(T-t)} N(d_2)
+\]
+\[
+  \frac{\partial c}{\partial d} = -r Ke^{-r(T - t)}N(d_2) - SN'(d_1) \frac{\sigma}{2 \sqrt{T - t}}
+\]
+
+
+\subsection*{(e)}
+Show that \(\partial c / \partial S = N(d_1)\). \\ \\
+
+
+\subsection*{(f)}
+Show that the \(c\) satisfies the Black-Scholes-Merton differential equation. \\ \\
+
+
+\subsection*{(g)}
+Show that \(c\) satisfies the boundary condition for a European call option, i.e., that \(c = \max(S - K, 0)\) as \(t\) tends to \(T\). \\ \\
+
+
+}
+{\Large 
+
+\section*{15.26}
+Suppose that observations on a stock price (in dollars) at the end of each of 15 consecutive weeks are as follows: \\
+30.2, 32.0, 31.1, 30.1, 30.2, 30.3, 30.6, 33.0, 32.9, 33.0, 33.5, 33.5, 33.7, 33.5, 33.2 \\
+Estimate the stock price volatility. What is the standard error of your estimate? \\ \\
+
+
+}
+
+\end{document}
