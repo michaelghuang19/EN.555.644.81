@@ -24,7 +24,37 @@
 
 \section*{15.3}
 Calculate the price of a three-month European put option on a non-dividend-paying stock with a strike price of \$50 when the current stock price is \$50, the risk-free interest rate is 10\% per annum, and the volatility is 30\% per annum. \\ \\
-
+We use the BSM forumlas, with \(S_0 = 50, K = 50, r = 0.10, \sigma = 0.30, T = \frac{3}{12} = \frac{1}{4}\):
+\[
+  d_1 = \frac{\ln(S_0 / K) + (r + \sigma^2 / 2)T}{\sigma \sqrt{T}}
+\]
+\[
+  = \frac{\ln(\frac{50}{50}) + (0.10 + \frac{0.3^2}{2}) \cdot \frac{1}{4}}{0.3 \cdot \sqrt{\frac{1}{4}}}
+\]
+\[
+  d_1 = \frac{0 + 0.03625}{0.15} = 0.2416666666
+\]
+and accordingly:
+\[
+  d_2 = d_1 - \sigma \sqrt{T}
+\]
+\[
+  d_2 = 0.2416666666 - 0.3 \cdot \sqrt{\frac{1}{4}} = 0.2416666666 - 0.15 = 0.0916666666
+\]
+The price of the put is therefore
+\[
+  p = Ke^{-rT} N(-d_2) - S_0 N(-d_1)
+\]
+\[
+  = 50 e^{-0.1 \cdot 0.25} N(-0.0916666666) - 50  N(-0.2416666666)
+\]
+looking at a standard normal cdf table and approximating: 
+\[
+  = 50 e^{-0.025} \cdot 0.4641 - 50 \cdot 0.4052
+\]
+\[
+  p = 22.6320665084 - 20.26 = 2.3720665084 \approx \boxed{\textbf{\$2.37}}
+\]
 
 }
 {\Large 
@@ -52,7 +82,37 @@ Confirm that your price satisfies the differential equation (15.16) \\ \\
 
 \section*{15.11}
 What is the price of a European call option on a non-dividend-paying stock when the stock price is \$52, the strike price is \$50, the risk-free interest rate is 12\% per annum, the volatility is 30\% per annum, and the time to maturity is three months? \\ \\
-
+We use the BSM forumlas, with \(S_0 = 52, K = 50, r = 0.12, \sigma = 0.30, T = \frac{3}{12} = \frac{1}{4}\):
+\[
+  d_1 = \frac{\ln(S_0 / K) + (r + \sigma^2 / 2)T}{\sigma \sqrt{T}}
+\]
+\[
+  = \frac{\ln(\frac{52}{50}) + (0.12 + \frac{0.3^2}{2}) \cdot \frac{1}{4}}{0.3 \cdot \sqrt{\frac{1}{4}}}
+\]
+\[
+  d_1 = \frac{0.03922071315 + 0.04125}{0.15} = \frac{0.08047071315}{0.15} = 0.536471421
+\]
+and accordingly:
+\[
+  d_2 = d_1 - \sigma \sqrt{T}
+\]
+\[
+  d_2 = 0.536471421 - 0.3 \cdot \sqrt{\frac{1}{4}} = 0.536471421 - 0.15 = 0.386471421
+\]
+The price of the call is therefore
+\[
+  c = S_0 N(d_1) - Ke^{-rT} N(d_2)
+\]
+\[
+  = 52 N(0.536471421) - 50 e^{-0.12 \cdot 0.25} N(0.386471421)
+\]
+looking at a standard normal cdf table and approximating: 
+\[
+  = 52 \cdot 0.7054 - 50 e^{-0.03} \cdot 0.6517
+\]
+\[
+  c = 36.6808 - 31.6219677104 = 5.0588322896 \approx \boxed{\textbf{\$5.06}}
+\]
 
 }
 {\Large 
