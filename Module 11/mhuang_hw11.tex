@@ -232,7 +232,7 @@ With the notation used in this chapter
 
 \subsection*{(a)}
 What is \(N'(x)\)? \\ \\
-
+\(N(x)\) represents the cumulative probability that that a variable within a standardized normal distribution will be less than \(x\), i.e. the cdf, \(N'(x)\) is the derivative of the cdf, i.e. the pdf or just the probability density for the variable being equal to \(x\). More explicitly, this would just be the function \(\frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}\) which is very familiar by now. 
 
 \subsection*{(b)}
 Show that \(SN'(d_1) = Ke^{-r(T-t)}N'(d_2)\), where \(S\) is the stock price at time \(t\) 
@@ -241,8 +241,34 @@ Show that \(SN'(d_1) = Ke^{-r(T-t)}N'(d_2)\), where \(S\) is the stock price at 
 \]
 \[
   d_2 = \frac{\ln(S / K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
-\] 
-
+\]
+Since \(d_1 = d_2 + \sigma \sqrt{T - t}\), we know that 
+\[
+  N'(d_1) = N'(d_2 + \sigma \sqrt{T-t})
+\]
+\[
+  = \frac{1}{\sqrt{2\pi}} e^{-\frac{d_2^2}{2} - \sigma d_2 \sqrt{T-t} - \frac{1}{2} \sigma^2 (T-t)}
+\]
+\[
+  = N'(d_2) e^{ - \sigma d_2 \sqrt{T-t} - \frac{1}{2} \sigma^2 (T-t)}
+\]
+Plugging in the given values for \(d_2\):
+\[
+  = N'(d_2) e^{ - \sigma \sqrt{T-t} \cdot \frac{\ln(S / K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}  - \frac{1}{2} \sigma^2 (T-t)}
+\]
+\[
+  = N'(d_2) e^{ - \ln(S / K) - (r - \sigma^2 / 2)(T - t) - \frac{1}{2} \sigma^2 (T-t)}
+\]
+\[
+  = N'(d_2) e^{ - \ln(S / K) - r(T - t)}
+\]
+\[
+  N'(d_1) = N'(d_2) \frac{K}{S}e^{-r(T - t)} 
+\]
+\[
+  S N'(d_1) = Ke^{-r(T - t)} N'(d_2)
+\]
+which is precisely what we sought to find. 
 
 \subsection*{(c)}
 Calculate \(\partial d_1 / \partial S\) and \(\partial d_2 / \partial S\). \\ \\
@@ -277,6 +303,36 @@ Show that \(c\) satisfies the boundary condition for a European call option, i.e
 Suppose that observations on a stock price (in dollars) at the end of each of 15 consecutive weeks are as follows: \\
 30.2, 32.0, 31.1, 30.1, 30.2, 30.3, 30.6, 33.0, 32.9, 33.0, 33.5, 33.5, 33.7, 33.5, 33.2 \\
 Estimate the stock price volatility. What is the standard error of your estimate? \\ \\
+To calculate the stock price volatility, we take the weekly log returns \(u_i = \ln(\frac{S_i}{S_{i-1}})\). We can then take the weekly standard deviation and annualize to 52 weeks, and then take the standard error accordingly. I did this in python to make it easier:
+\begin{verbatim}
+import numpy as np
+
+weekly_returns = np.array([30.2, 32.0, 31.1, 30.1, 30.2, 30.3, 30.6, 33.0, 32.9, 33.0, 33.5, 33.5, 33.7, 33.5, 33.2])
+
+u = np.log(weekly_returns[1:] / weekly_returns[:-1])
+sum_u = np.sum(u)
+sum_u_squared = np.sum(u**2)
+
+weekly_returns_sd = np.sqrt((sum_u_squared - (sum_u**2) / len(weekly_returns)) / (len(weekly_returns) - 1))
+
+annual_vol = weekly_returns_sd * np.sqrt(52)
+
+vol_standard_error = annual_vol / np.sqrt(2 * len(weekly_returns))
+
+print(f"Weekly returns SD: {weekly_returns_sd}")
+print(f"Annual volatility estimate: {annual_vol}")
+print(f"Standard error of estimate: {vol_standard_error}")
+\end{verbatim}
+
+with the following output:
+
+\begin{verbatim}
+> python 15_26.py
+Weekly returns SD: 0.027841997134013863
+Annual volatility estimate: 0.20077149655601684
+Standard error of estimate: 0.0366556925226004
+\end{verbatim}
+So we see that the annual volatility estimate is approximately \boxed{\textbf{20.08\%}} and the standard error of that estimate is approximately \boxed{\textbf{3.67\%}}.
 
 
 }
