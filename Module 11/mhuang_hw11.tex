@@ -272,7 +272,32 @@ which is precisely what we sought to find.
 
 \subsection*{(c)}
 Calculate \(\partial d_1 / \partial S\) and \(\partial d_2 / \partial S\). \\ \\
-
+For \(d_1\):
+\[
+  d_1 = \frac{\ln(S / K) + (r + \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  \frac{\partial d_1}{\partial S} = \frac{\partial}{\partial S} \frac{\ln(S / K) + (r + \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  = \frac{\partial}{\partial S} \frac{\ln(S) - \ln(K) + (r + \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  \frac{\partial d_1}{\partial S} = \frac{1 - 0 + 0}{S \sigma \sqrt{T - t}} = \boxed{\mathbf{\frac{1}{S \sigma \sqrt{T - t}}}}
+\]
+For \(d_2\):
+\[
+  d_2 = \frac{\ln(S / K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  \frac{\partial d_2}{\partial S} = \frac{\partial}{\partial S} \frac{\ln(S / K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  = \frac{\partial}{\partial S} \frac{\ln(S) - \ln(K) + (r - \sigma^2 / 2)(T - t)}{\sigma \sqrt{T - t}}
+\]
+\[
+  \frac{\partial d_2}{\partial S} = \frac{1 - 0 + 0}{S \sigma \sqrt{T - t}} = \boxed{\mathbf{\frac{1}{S \sigma \sqrt{T - t}}}}
+\]
 
 \subsection*{(d)}
 Show that when 
@@ -282,19 +307,110 @@ Show that when
 \[
   \frac{\partial c}{\partial d} = -r Ke^{-r(T - t)}N(d_2) - SN'(d_1) \frac{\sigma}{2 \sqrt{T - t}}
 \]
-
+We start with 
+\[
+  c = SN(d_1) - Ke^{-r(T-t)} N(d_2)
+\]
+Differentiating:
+\[
+  \frac{\partial c}{\partial t} = SN'(d_1) \frac{\partial d_1}{\partial t} - Ke^{-r(T-t)} \cdot r \cdot N(d_2) - Ke^{-r(T-t)} \cdot N'(d_2) \frac{\partial d_2}{\partial t}
+\]
+We previously showed that \(SN'(d_1) = Ke^{-r(T-t)}N'(d_2)\), so substitute accordingly:
+\[
+  = SN'(d_1) \frac{\partial d_1}{\partial t} - r Ke^{-r(T-t)} N(d_2) - S N'(d_1) \frac{\partial d_2}{\partial t}
+\]
+\[
+  = SN'(d_1) (\frac{\partial d_1}{\partial t} - \frac{\partial d_2}{\partial t}) - r Ke^{-r(T-t)} N(d_2)
+\]
+Looking at the first term, we can derive this partial derivative as well; we know that 
+\[
+  d_2 = d_1 - \sigma \sqrt{T}
+\]
+\[
+  \sigma \sqrt{T} = d_1 - d_2 
+\]
+In our case, \(T = T-t\). Now differentiating:
+\[
+  \frac{\partial}{\partial t} \sigma \sqrt{T - t} = \frac{\partial d_1}{\partial t} - \frac{\partial d_2}{\partial t}
+\]
+\[
+  \frac{\partial d_1}{\partial t} - \frac{\partial d_2}{\partial t} = \sigma \cdot (T - t)^{-\frac{1}{2}} \cdot -\frac{1}{2}
+\]
+\[
+  \frac{\partial d_1}{\partial t} - \frac{\partial d_2}{\partial t} = - \frac{\sigma}{2 \sqrt{T - t}}
+\]
+Finally, plugging this in:
+\[
+  \boxed{\mathbf{\frac{\partial c}{\partial t} = - \frac{SN'(d_1) \sigma}{2 \sqrt{T - t}} - r Ke^{-r(T-t)} N(d_2)}}
+\]
 
 \subsection*{(e)}
 Show that \(\partial c / \partial S = N(d_1)\). \\ \\
-
+We start with 
+\[
+  c = SN(d_1) - Ke^{-r(T-t)} N(d_2)
+\]
+Differentiating:
+\[
+  \frac{\partial c}{\partial S} = N(d_1) + S N'(d_1) \frac{\partial d_1}{\partial S} - Ke^{-r(T-t)} N'(d_2) \frac{\partial d_2}{\partial S}
+\]
+We previously showed that \(SN'(d_1) = Ke^{-r(T-t)}N'(d_2)\), so substitute accordingly:
+\[
+  \frac{\partial c}{\partial S} = N(d_1) + S N'(d_1) \frac{\partial d_1}{\partial S} - S N'(d_1) \frac{\partial d_2}{\partial S}
+\]
+\[
+  = N(d_1) + S N'(d_1) (\frac{\partial d_1}{\partial S} - \frac{\partial d_2}{\partial S})
+\]
+We also previously showed that \(\frac{\partial d_1}{\partial S} = \frac{\partial d_2}{\partial S} = \frac{1}{S \sigma \sqrt{T - t}}\), so substitute accordingly:
+\[
+  = N(d_1) + S N'(d_1) (\frac{1}{S \sigma \sqrt{T - t}} - \frac{1}{S \sigma \sqrt{T - t}})
+\]
+\[
+  \boxed{\mathbf{\frac{\partial c}{\partial S} = N(d_1)}}
+\]
 
 \subsection*{(f)}
-Show that the \(c\) satisfies the Black-Scholes-Merton differential equation. \\ \\
-
+Show that \(c\) satisfies the Black-Scholes-Merton differential equation. \\ \\
+We aim to show that 
+\[
+  \frac{\partial f}{\partial t} + rS\frac{\partial f}{\partial S} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 f}{\partial S^2} = rf
+\]
+where \(f = c\). We've already found \(\frac{\partial c}{\partial t}\) and \(\frac{\partial c}{\partial S}\), let's find \(\frac{\partial^2 c}{\partial S^2}\):
+\[
+  \frac{\partial^2 c}{\partial S^2} = \frac{\partial }{\partial S} N(d_1)
+\]
+\[
+  \frac{\partial^2 c}{\partial S^2} = N'(d_1) \frac{\partial d_1}{\partial S}
+\]
+\[
+  \frac{\partial^2 c}{\partial S^2} = \frac{N'(d_1)}{S \sigma \sqrt{T - t}}
+\]
+Let's now substitute accordingly:
+\[
+  \frac{\partial c}{\partial t} + rS\frac{\partial c}{\partial S} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 c}{\partial S^2}
+\]
+\[
+  = - \frac{SN'(d_1) \sigma}{2 \sqrt{T - t}} - r Ke^{-r(T-t)} N(d_2) + r S N(d_1) + \frac{1}{2}\sigma^2 S^2 \cdot \frac{N'(d_1)}{S \sigma \sqrt{T - t}}
+\]
+\[
+  = - \frac{SN'(d_1) \sigma}{2 \sqrt{T - t}} - r Ke^{-r(T-t)} N(d_2) + r S N(d_1) + \frac{SN'(d_1)\sigma}{2\sqrt{T - t}}
+\]
+\[
+  = - r Ke^{-r(T-t)} N(d_2) + r S N(d_1) 
+\]
+\[
+  = r (S N(d_1)  - Ke^{-r(T-t)} N(d_2))
+\]
+\[
+  = rc
+\]
+Exactly as we sought to find. 
 
 \subsection*{(g)}
 Show that \(c\) satisfies the boundary condition for a European call option, i.e., that \(c = \max(S - K, 0)\) as \(t\) tends to \(T\). \\ \\
-
+We know that \( c = SN(d_1) - Ke^{-r(T-t)} N(d_2) \). As \(t\) approaches \(T\): \\
+- If \(S > K\): We have \(\ln(\frac{S}{K}) > 0\) while \(\sigma \sqrt{T - t}\) approaches 0, so \(d_1\) and \(d_2\) approach infinity. Therefore \(N(d_1)\) and \(N(d_2)\) approach 1. \(c\) essentially becomes \(S - K\), which given our initial assumption, is positive and therefore greater than 0. \boxed{\textbf{The condition holds}}. \\
+- If \(S < K\): We have \(\ln(\frac{S}{K} < 0)\) while \(\sigma \sqrt{T - t}\) approaches 0, so \(d_1\) and \(d_2\) approach negative infinity. Therefore \(N(d_1)\) and \(N(d_2)\) approach 0. \(c\) therefore basically just becomes 0, which given our initial assumption, would be greater than \(S - K\), which would be negative, so \boxed{\textbf{the condition also holds}}.
 
 }
 {\Large 
