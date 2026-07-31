@@ -38,7 +38,8 @@ an American four- month call option with the same strike price \\ \\
 
 \section*{17.22}
 Can an option on the yen-euro exchange rate be created from two options, one on the dollar-euro exchange rate, and the other on the dollar-yen exchange rate? Explain your answer. \\ \\
-
+An option on the yen-euro exchange rate cannot be created from two separate options. As implied in the problem statement, even if you take one option to exchange some amount of euros for its equivalent amount in dollars, and then another option to exchange that amount of dollars for the equivalent amount in yen. This might appear to work on the surface, but this requires the options to be exercised in conjunction; that is, either both options have to be exercised or neither of the options are exercised. However, there is no guarantee that both options will expire in the money (and, naturally, also out of the money) at the exact same time. 
+% One can easily construct a case where 
 
 }
 {\Large 
@@ -59,7 +60,7 @@ Calculate the value of a five-month European put futures option when the futures
 
 \section*{18.8}
 Suppose you buy a put option contract on October gold futures with a strike price of \$1,400 per ounce. Each contract is for the delivery of 100 ounces. What happens if you exercise when the October futures price is \$1,380? \\ \\
-
+If we exercised the contract when the October futures price is \$1,380, then we would end up with \(1,400 - 1,380 = \$20\) of profit per ounce, so for 100 ounces, that would be \(100 \cdot \$20 = \$2,000\) of profit that would be added to our margin account. We would then also get the short futures position that would then be exercised accordingly, with it obligating us to sell that 100 ounces of gold in October. 
 
 }
 {\Large 
@@ -73,7 +74,24 @@ A futures price is currently 70, its volatility is 20\% per annum, and the risk-
 
 \section*{18.22}
 A futures price is currently 40. It is known that at the end of three months the price will be either 35 or 45. What is the value of a three-month European call option on the futures with a strike price of 42 if the risk-free interest rate is 7\% per annum? \\ \\
-
+% Draw out the graph on excalidraw
+We use the method with valuing futures options using binomial trees. We naturally can see that \(u = \frac{45}{40} = 1.125\) and \(d = \frac{35}{40} = 0.875\). Then using the given equation:
+\[
+  p = \frac{1 - d}{u - d} 
+\]
+\[
+  = \frac{1 - 0.875}{1.125 - 0.875} = \frac{0.125}{0.25} = 0.5 
+\]
+We can therefore value the option at 
+\[
+  f = e^{-rT} [ p f_u + (1 - p) f_d]
+\]
+\[
+  = e^{-0.07 \cdot \frac{3}{12}} \cdot [ 0.5 \cdot (45 - 42) + (1 - 0.5) \cdot 0]
+\]
+\[
+  = e^{-0.0175} \cdot [ 1.5 + 0] = 0.98265224 \cdot 1.5 = 1.47397835 \approx \boxed{\mathbf{\$1.47}}
+\]
 
 }
 
