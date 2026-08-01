@@ -27,11 +27,56 @@ A currency is currently worth \$0.80 and has a volatility of 12\%. The domestic 
 
 \subsection*{(a)}
 a European four-month call option with a strike price of \$0.79 \\ \\
-
+We aim to create a binomial tree for this. To determine \(u\) and \(p\), we model this as a dividend-yielding stock, since this is similar to how a currency generates interest. We therefore have 
+\[
+  u = e^{\sigma \sqrt{\Delta t}}
+\]
+with \(\Delta t = \frac{4}{12} \div 2 = \frac{1}{6}\) due to the two steps.
+\[
+  u = e^{0.12 \cdot \sqrt{\frac{1}{6}}} = 1.05020963
+\]
+Accordingly, we have 
+\[
+  d = \frac{1}{u} = \frac{1}{1.05020963} = 0.95219085
+\]
+and
+\[
+  a = e^{(r - q) \Delta t} = e^{(0.06 - 0.08) \cdot \frac{1}{6}} = 0.99667222
+\]
+Finally, putting this all together:
+\[
+  p = \frac{a - d}{u - d} = \frac{0.99667222 - 0.95219085}{1.05020963 - 0.95219085} = \frac{0.04448137}{0.09801878} = 0.45380457
+\]
+We can finally build the tree, with values \\
+- \(u = 0.80 \cdot 1.05020963 = 0.8401677\) \\ 
+- \(d = 0.80 \cdot 0.95219085 = 0.76175268\) \\ 
+- \(uu = 0.80 \cdot 1.05020963^2 = 0.88235221\) \\
+- \(ud = 0.80\) \\
+- \(dd = 0.80 \cdot 0.95219085^2 = 0.72533393\) \\
+and we walk up the tree accordingly: \\
+- \(f_u = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.09235221 + (1 - 0.45380457) \cdot 0.01) \\ 
+= 0.99004983 \cdot (0.04190985 + 0.00546195) = 0.04690044\) \\
+- \(f_d = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.01 + (1 - 0.45380457) \cdot 0) \\ 
+= 0.99004983 \cdot 0.00453805 = 0.00449289 \) \\
+- \(f_0 = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.04690044 + (1 - 0.45380457) \cdot 0.00449289) \\
+= 0.99004983 \cdot (0.02128363 + 0.002454) = 0.02350144\) 
+So we have the final price as approximately \boxed{\textbf{\$0.02}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_4_a_tree.png}
+\end{figure}
 
 \subsection*{(b)}
 an American four- month call option with the same strike price \\ \\
-
+Here, the difference is that we just check at each stage for early exercise. All the last-layer nodes have their profits stay as we haven't looked at the profit any other price point. At the middle layer: \\
+- For the \(u\) node, exercising immediately gives \(0.8401677 - 0.79 = 0.0501677 > 0.04690044\), so replace the profit with this new value. \\
+- For the \(d\) node, exercising immediately gives \(0 < 0.00449289\), so keep this calculated value. \\
+Finally, at the first node, exercising immediately gives \(0.01 < 0.45380457 \cdot 0.0501677 + (1 - 0.45380457) \cdot 0.00449289 = 0.02276633 + 0.002454 = 0.02522033\), so keep this calculated value as well. \\
+We therefore have the final price as approximately \boxed{\textbf{\$0.03}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_4_b_tree.png}
+\end{figure}
 
 }
 {\Large 
@@ -39,14 +84,38 @@ an American four- month call option with the same strike price \\ \\
 \section*{17.22}
 Can an option on the yen-euro exchange rate be created from two options, one on the dollar-euro exchange rate, and the other on the dollar-yen exchange rate? Explain your answer. \\ \\
 An option on the yen-euro exchange rate cannot be created from two separate options. As implied in the problem statement, even if you take one option to exchange some amount of euros for its equivalent amount in dollars, and then another option to exchange that amount of dollars for the equivalent amount in yen. This might appear to work on the surface, but this requires the options to be exercised in conjunction; that is, either both options have to be exercised or neither of the options are exercised. However, there is no guarantee that both options will expire in the money (and, naturally, also out of the money) at the exact same time. 
-% One can easily construct a case where 
 
 }
 {\Large 
 
 \section*{17.23}
 The Dow Jones Industrial Average on January 12, 2007 was 12,556 and the price of the March 126 call was \$2.25. Use the DerivaGem software to calculate the implied volatility of this option. Assume that the risk-free rate was 5.3\% and the dividend yield was 3\%. The option expires on March 20, 2007. Estimate the price of a March 126 put. What is the volatility implied by the price you estimate for this option? (Note that options are on the Dow Jones index divided by 100.) \\ \\
-
+The only thing we need to figure out before plugging into DerivaGem is \(T\); there are 67 days between January 12, 2007 and March 20, 2007, so \(T = \frac{67}{365}\). Plugging everything into DerivaGem, we see that the implied volatility of the call option is around \boxed{\textbf{10.33\%}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_23_derivagem_call.png}
+\end{figure} \\ 
+From put-call parity, we know that 
+\[
+  c + K e^{-r T} = p + S_0 e^{-q T}
+\]
+\[
+  p = c + K e^{-r T} - S_0 e^{-q T}
+\]
+\[
+  = 2.25 + 126 \cdot e^{-0.053 \cdot \frac{67}{365}} - 125.56 \cdot e^{-0.03 \cdot \frac{67}{365}}
+\]
+\[
+  = 2.25 + 126 \cdot 0.9903184 - 125.56 \cdot 0.99450829
+\]
+\[
+  p = 2.25 + 124.7801184 - 124.87046089 = 2.15965751 \approx \boxed{\mathbf{\$2.16}}
+\]
+Now plugging this into DerivaGem as well, we see that the implied volatility is also approximately \boxed{\textbf{10.33\%}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_23_derivagem_call.png}
+\end{figure} 
 
 }
 {\Large 
@@ -99,7 +168,7 @@ Looking up in a table and approximating with interpolation: \\
 
 \section*{18.8}
 Suppose you buy a put option contract on October gold futures with a strike price of \$1,400 per ounce. Each contract is for the delivery of 100 ounces. What happens if you exercise when the October futures price is \$1,380? \\ \\
-If we exercised the contract when the October futures price is \$1,380, then we would end up with \(1,400 - 1,380 = \$20\) of profit per ounce, so for 100 ounces, that would be \(100 \cdot \$20 = \$2,000\) of profit that would be added to our margin account. We would then also get the short futures position that would then be exercised accordingly, with it obligating us to sell that 100 ounces of gold in October. 
+If we exercised the contract when the October futures price is \$1,380, then we would end up with \(1,400 - 1,380 = \$20\) of profit per ounce, so for 100 ounces, that would be \(100 \cdot \$20 = \$2,000\) of profit that would be added to our margin account. We would then also get the short futures position at the current futures price of \$1,380 that could then be exercised accordingly, with it obligating us to sell that 100 ounces of gold in October. 
 
 }
 {\Large 
