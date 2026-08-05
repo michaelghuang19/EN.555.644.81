@@ -1,0 +1,245 @@
+\documentclass{article}
+\linespread{1.3}
+\usepackage[margin=50pt]{geometry}
+\usepackage{amsmath, amsthm, amssymb, amsthm, tikz, fancyhdr, float, graphicx, spverbatim, systeme}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\changefont}{\fontsize{15}{15}\selectfont}
+
+\fancypagestyle{firstpageheader}{
+  \fancyhead[R]{
+    \changefont
+    \parbox[t]{4cm}{ % Adjust width as needed
+      Michael Huang\\
+      EN.555.644.81\\
+      Homework 12
+    }
+  }
+}
+
+\begin{document}
+
+\thispagestyle{firstpageheader}
+{\Large 
+
+\section*{17.4}
+A currency is currently worth \$0.80 and has a volatility of 12\%. The domestic and foreign risk-free interest rates are 6\% and 8\%, respectively. Use a two-step binomial tree to value 
+
+\subsection*{(a)}
+a European four-month call option with a strike price of \$0.79 \\ \\
+We aim to create a binomial tree for this. To determine \(u\) and \(p\), we model this as a dividend-yielding stock, since this is similar to how a currency generates interest. We therefore have 
+\[
+  u = e^{\sigma \sqrt{\Delta t}}
+\]
+with \(\Delta t = \frac{4}{12} \div 2 = \frac{1}{6}\) due to the two steps.
+\[
+  u = e^{0.12 \cdot \sqrt{\frac{1}{6}}} = 1.05020963
+\]
+Accordingly, we have 
+\[
+  d = \frac{1}{u} = \frac{1}{1.05020963} = 0.95219085
+\]
+and
+\[
+  a = e^{(r - q) \Delta t} = e^{(0.06 - 0.08) \cdot \frac{1}{6}} = 0.99667222
+\]
+Finally, putting this all together:
+\[
+  p = \frac{a - d}{u - d} = \frac{0.99667222 - 0.95219085}{1.05020963 - 0.95219085} = \frac{0.04448137}{0.09801878} = 0.45380457
+\]
+We can finally build the tree, with values \\
+- \(u = 0.80 \cdot 1.05020963 = 0.8401677\) \\ 
+- \(d = 0.80 \cdot 0.95219085 = 0.76175268\) \\ 
+- \(uu = 0.80 \cdot 1.05020963^2 = 0.88235221\) \\
+- \(ud = 0.80\) \\
+- \(dd = 0.80 \cdot 0.95219085^2 = 0.72533393\) \\
+and we walk up the tree accordingly: \\
+- \(f_u = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.09235221 + (1 - 0.45380457) \cdot 0.01) \\ 
+= 0.99004983 \cdot (0.04190985 + 0.00546195) = 0.04690044\) \\
+- \(f_d = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.01 + (1 - 0.45380457) \cdot 0) \\ 
+= 0.99004983 \cdot 0.00453805 = 0.00449289 \) \\
+- \(f_0 = e^{-0.06 \cdot \frac{1}{6}} \cdot (0.45380457 \cdot 0.04690044 + (1 - 0.45380457) \cdot 0.00449289) \\
+= 0.99004983 \cdot (0.02128363 + 0.002454) = 0.02350144\) 
+So we have the final price as approximately \boxed{\textbf{\$0.02}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_4_a_tree.png}
+\end{figure}
+
+\subsection*{(b)}
+an American four- month call option with the same strike price \\ \\
+Here, the difference is that we just check at each stage for early exercise. All the last-layer nodes have their profits stay as we haven't looked at the profit any other price point. At the middle layer: \\
+- For the \(u\) node, exercising immediately gives \(0.8401677 - 0.79 = 0.0501677 > 0.04690044\), so replace the profit with this new value. \\
+- For the \(d\) node, exercising immediately gives \(0 < 0.00449289\), so keep this calculated value. \\
+Finally, at the first node, exercising immediately gives \(0.01 < 0.45380457 \cdot 0.0501677 + (1 - 0.45380457) \cdot 0.00449289 = 0.02276633 + 0.002454 = 0.02522033\), so keep this calculated value as well. \\
+We therefore have the final price as approximately \boxed{\textbf{\$0.03}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_4_b_tree.png}
+\end{figure}
+
+}
+{\Large 
+
+\section*{17.22}
+Can an option on the yen-euro exchange rate be created from two options, one on the dollar-euro exchange rate, and the other on the dollar-yen exchange rate? Explain your answer. \\ \\
+An option on the yen-euro exchange rate cannot be created from two separate options. As implied in the problem statement, even if you take one option to exchange some amount of euros for its equivalent amount in dollars, and then another option to exchange that amount of dollars for the equivalent amount in yen. This might appear to work on the surface, but this requires the options to be exercised in conjunction; that is, either both options have to be exercised or neither of the options are exercised. However, there is no guarantee that both options will expire in the money (and, naturally, also out of the money) at the exact same time. 
+
+}
+{\Large 
+
+\section*{17.23}
+The Dow Jones Industrial Average on January 12, 2007 was 12,556 and the price of the March 126 call was \$2.25. Use the DerivaGem software to calculate the implied volatility of this option. Assume that the risk-free rate was 5.3\% and the dividend yield was 3\%. The option expires on March 20, 2007. Estimate the price of a March 126 put. What is the volatility implied by the price you estimate for this option? (Note that options are on the Dow Jones index divided by 100.) \\ \\
+The only thing we need to figure out before plugging into DerivaGem is \(T\); there are 67 days between January 12, 2007 and March 20, 2007, so \(T = \frac{67}{365}\). Plugging everything into DerivaGem, we see that the implied volatility of the call option is around \boxed{\textbf{10.33\%}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_23_derivagem_call.png}
+\end{figure} \\ 
+From put-call parity, we know that 
+\[
+  c + K e^{-r T} = p + S_0 e^{-q T}
+\]
+\[
+  p = c + K e^{-r T} - S_0 e^{-q T}
+\]
+\[
+  = 2.25 + 126 \cdot e^{-0.053 \cdot \frac{67}{365}} - 125.56 \cdot e^{-0.03 \cdot \frac{67}{365}}
+\]
+\[
+  = 2.25 + 126 \cdot 0.9903184 - 125.56 \cdot 0.99450829
+\]
+\[
+  p = 2.25 + 124.7801184 - 124.87046089 = 2.15965751 \approx \boxed{\mathbf{\$2.16}}
+\]
+Now plugging this into DerivaGem as well, we see that the implied volatility is also approximately \boxed{\textbf{10.33\%}}.
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=400pt]{17_23_derivagem_call.png}
+\end{figure} 
+
+}
+{\Large 
+
+\section*{18.7}
+Calculate the value of a five-month European put futures option when the futures price is \$19, the strike price is \$20, the risk-free interest rate is 12\% per annum, and the volatility of the futures price is 20\% per annum. \\ \\
+We have that \(T = \frac{5}{12}, F_0 = 19, K = 20, r = 0.12, \sigma = 0.20\). Using Black's model:
+\[
+   d_1 = \frac{\ln(\frac{F_0}{K}) + \frac{\sigma^2 T}{2}}{\sigma \sqrt{T}}
+\]
+\[
+  = \frac{\ln(\frac{19}{20}) + \frac{0.2^2 \cdot \frac{5}{12}}{2}}{0.2 \cdot \sqrt{\frac{5}{12}}}
+\]
+\[
+  d_1 = \frac{-0.05129329 + \frac{1}{120}}{0.2 \cdot 0.64549722} = \frac{-0.04295996}{0.12909944} = -0.33276639
+\]
+and 
+\[
+  d_2 = d_1 - \sigma \sqrt{T}
+\]
+\[
+  d_2 = -0.33276639 - 0.2 \cdot \sqrt{\frac{5}{12}} = -0.33276639 - 0.12909944 = -0.46186583
+\]
+Putting this all together:
+\[
+  p = e^{-rT} [K N (-d_2) - F_0 N (-d_1)]
+\]
+\[
+  = e^{-0.12 \cdot \frac{5}{12}} [20 \cdot N (0.46186583) - 19 \cdot N (0.33276639)]
+\]
+Looking up in a table and approximating with interpolation: \\
+\(
+  p = e^{-0.12 \cdot \frac{5}{12}} [20 \cdot (N(0.46) + 0.186583(N(0.47) - N(0.46))) - 19 \cdot (N(0.33) + 0.276639(N(0.34) - N(0.33)))]
+\) \\ \\
+\(
+  = 0.95122942 \cdot [20 \cdot (0.6772 + 0.186583(0.6808 - 0.6772)) - 19 \cdot (0.6293 + 0.276639(0.6331 - 0.6293))]
+\)
+\[
+  = 0.95122942 \cdot [20 \cdot (0.6772 + 0.186583(0.0036)) - 19 \cdot (0.6293 + 0.276639(0.0038))]
+\]
+\[
+  = 0.95122942 \cdot (20 \cdot 0.6778717 - 19 \cdot 0.63035123)
+\]
+\[
+  p = 0.95122942 \cdot (13.557434 - 11.97667337) = 1.50366602 \approx \boxed{\mathbf{\$1.50}}
+\]
+
+}
+{\Large 
+
+\section*{18.8}
+Suppose you buy a put option contract on October gold futures with a strike price of \$1,400 per ounce. Each contract is for the delivery of 100 ounces. What happens if you exercise when the October futures price is \$1,380? \\ \\
+If we exercised the contract when the October futures price is \$1,380, then we would end up with \(1,400 - 1,380 = \$20\) of profit per ounce, so for 100 ounces, that would be \(100 \cdot \$20 = \$2,000\) of profit that would be added to our margin account. We would then also get the short futures position at the current futures price of \$1,380 that could then be exercised accordingly, with it obligating us to sell that 100 ounces of gold in October. 
+
+}
+{\Large 
+
+\section*{18.15}
+A futures price is currently 70, its volatility is 20\% per annum, and the risk-free interest rate is 6\% per annum. What is the value of a five-month European put on the futures with a strike price of 65? \\ \\
+We have \(F_0 = 70, \sigma = 0.20, r = 0.06, T = \frac{5}{12}, K = 65\). Using Black's model: 
+\[
+   d_1 = \frac{\ln(\frac{F_0}{K}) + \frac{\sigma^2 T}{2}}{\sigma \sqrt{T}}
+\]
+\[
+  = \frac{\ln(\frac{70}{65}) + \frac{0.2^2 \cdot \frac{5}{12}}{2}}{0.2 \cdot \sqrt{\frac{5}{12}}}
+\]
+\[
+  d_1 = \frac{0.07410797 + \frac{1}{120}}{0.2 \cdot 0.64549722} = \frac{0.0824413}{0.12909944} = 0.63858759
+\]
+and 
+\[
+  d_2 = d_1 - \sigma \sqrt{T}
+\]
+\[
+  d_2 = 0.63858759 - 0.2 \cdot \sqrt{\frac{5}{12}} = 0.63858759 - 0.12909944 = 0.50948815
+\]
+Putting this all together:
+\[
+  p = e^{-rT} [K N (-d_2) - F_0 N (-d_1)]
+\]
+\[
+  = e^{-0.06 \cdot \frac{5}{12}} [65 \cdot N (-0.50948815) - 70 \cdot N (-0.63858759)]
+\]
+Looking up in a table and approximating with interpolation: \\
+\(
+  p = e^{-\frac{1}{40}} [65 \cdot (N(-0.50) - 0.948815(N(0.50) - N(0.51))) - 70 \cdot (N(-0.63) - 0.858759(N(-0.63) - N(-0.64)))]
+\) \\ \\
+\(
+  = e^{-\frac{1}{40}} [65 \cdot (0.3085 - 0.948815(0.3085 - 0.3050)) - 70 \cdot (0.2643 - 0.858759(0.2643 - 0.2611))]
+\)
+\[
+  = e^{-\frac{1}{40}} [65 \cdot (0.3085 - 0.948815(0.0035)) - 70 \cdot (0.2643 - 0.858759(0.0032))]
+\]
+\[
+  = e^{-\frac{1}{40}} (65 \cdot 0.30517915 - 70 \cdot 0.26155197)
+\]
+\[
+  = 0.97530991 \cdot (19.83664475 - 18.3086379) = 1.49028022 \approx \boxed{\mathbf{\$1.49}}
+\]
+
+
+}
+{\Large 
+
+\section*{18.22}
+A futures price is currently 40. It is known that at the end of three months the price will be either 35 or 45. What is the value of a three-month European call option on the futures with a strike price of 42 if the risk-free interest rate is 7\% per annum? \\ \\
+We naturally can see that \(u = \frac{45}{40} = 1.125\) and \(d = \frac{35}{40} = 0.875\). Then using the given equation:
+\[
+  p = \frac{1 - d}{u - d} 
+\]
+\[
+  = \frac{1 - 0.875}{1.125 - 0.875} = \frac{0.125}{0.25} = 0.5 
+\]
+We can therefore value the option at 
+\[
+  f = e^{-rT} [ p f_u + (1 - p) f_d]
+\]
+\[
+  = e^{-0.07 \cdot \frac{3}{12}} \cdot [ 0.5 \cdot (45 - 42) + (1 - 0.5) \cdot 0]
+\]
+\[
+  = e^{-0.0175} \cdot [ 1.5 + 0] = 0.98265224 \cdot 1.5 = 1.47397835 \approx \boxed{\mathbf{\$1.47}}
+\]
+
+}
+
+\end{document}
