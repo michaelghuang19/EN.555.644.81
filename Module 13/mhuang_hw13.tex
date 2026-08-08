@@ -25,21 +25,53 @@
 \section*{19.1}
 What does it mean to assert that the delta of a call option is 0.7? How can a short position in 1,000 options be made delta neutral when the delta of each option is 0.7? \\ \\
 Asserting that the delta of a call option is 0.7 means that when the price of its underlying stock increases or decreases by some amount, the call option's price increases or decreases by 70\% of that amount. \\ \\
-To make the short position delta neutral, we see that our short position has delta of \(0.7 \cdot 1000 = 700\), but as this is a short position, it is -700. So to get to 0, we simply purchase 700 shares.
+To make the short position delta neutral, we see that our short position has delta of \(0.7 \cdot 1000 = 700\), but as this is a short position, it is -700. So to get to 0, we simply \boxed{\textbf{purchase 700 shares}}.
 
 }
 {\Large 
 
 \section*{19.6}
 What is the delta of a short position in 1,000 European call options on silver futures? The options mature in eight months, and the futures contract underlying the option matures in nine months. The current nine-month futures price is \$8 per ounce, the exercise price of the options is \$8, the risk-free interest rate is 12\% per annum, and the volatility of silver futures prices is 18\% per annum. \\ \\
-
+We are evaluating a short position in call options with futures as underlying. For a call, we know that \(\Delta = N(d_1)\), but since we are using futures as the underyling, we instead use the futures price and set \(q = r\), so we calculate 
+\[
+  \Delta = e^{-rT} N(d_1)
+\]
+\[
+  = e^{-rT} N(\frac{\ln(\frac{F_0}{K}) + \frac{1}{2} \sigma^2 T}{\sigma \sqrt{T}})
+\]
+with \(T = \frac{8}{12} = \frac{2}{3}, F_0 = 8, K = 8, r = 0.12, \sigma = 0.18\):
+\[
+  = e^{-0.12 \cdot \frac{2}{3}} \cdot N(\frac{\ln(\frac{8}{8}) + \frac{1}{2} \cdot 0.18^2 \cdot \frac{2}{3}}{0.18 \cdot \sqrt{\frac{2}{3}}})
+\]
+\[
+  = e^{-0.08} \cdot N(\frac{0 + 0.0108}{0.14696938456})
+\]
+\[
+  = 0.92311634638 \cdot N(0.07348469228)
+\]
+\[
+  = 0.92311634638 \cdot (N(0.07) + 0.348469228(N(0.08) - N(0.07)))
+\]
+\[
+  = 0.92311634638 \cdot (0.5279 +  0.348469228(0.5319 - 0.5279))
+\]
+\[
+  = 0.92311634638 \cdot (0.5279 +  0.00139387691)
+\]
+\[
+  \Delta = 0.48859982981
+\]
+So the delta of the short positions in 1,000 futures options is \(0.48859982981 \cdot -1,000\) = \boxed{\textbf{-488.59982981}}
 
 }
 {\Large 
 
 \section*{19.7}
 In Problem 19.6, what initial position in nine-month silver futures is necessary for delta hedging? If silver itself is used, what is the initial position? If one-year silver futures are used, what is the initial position? Assume no storage costs for silver. \\ \\
-
+We are evaluating how to delta hedge using the futures contract compared to the actual underlying commodity itself. By definition, we know that the futures delta compared is 1, since we are measuring the delta of the futures relative to a short position using underlying of futures. \\ \\
+Building on top of Problem 19.6, using nine-month silver futures, we would need an initial position on \(488.59982981 \cdot 1 = \) \boxed{\textbf{488.59982981 ounces}}. \\ \\
+Using silver itself, knowing \(F_0 = S_0 e^{rT}\), we see that the delta relative to the underlying commodity by definition is \(e^{rT} = e^{0.12 \cdot \frac{9}{12}} = e^{0.09} = 1.09417428371\). So to hedge with silver itself, we would need an initial position on \(488.59982981 \cdot 1.09417428371 = \) \boxed{\textbf{534.613368803 ounces}}. \\ \\
+Finally, using one-year options, we convert using \(H_F = e^{-rT} H_A\), so we have \(H_f = e^{-0.12 \cdot 1} = 0.88692043671\). Therefore, to hedge with the one-year silver futures, we would need an initial position on \(534.613368803 \cdot 0.88692043671 = \) \boxed{\textbf{474.15952253 ounces}}.
 
 }
 {\Large 
