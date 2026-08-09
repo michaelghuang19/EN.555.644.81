@@ -96,14 +96,35 @@ A financial institution has the following portfolio of over-the-counter options 
 \end{center}
 A traded option is available with a delta of 0.6, a gamma of 1.5, and a vega of 0.8.
 
-
 \subsection*{(a)} 
 What position in the traded option and in sterling would make the portfolio both gamma neutral and delta neutral? \\ \\
-
+Let's first calculate the corresponding greeks of the portfolio. \\
+The delta of the portfolio is 
+\[
+  \Delta = -1,000 \cdot 0.5 - 500 \cdot 0.8 - 2,000 \cdot -0.40 + -500 \cdot 0.70
+\]
+\[
+  \Delta = -500 - 400 + 800 - 350 = -450
+\]
+The gamma of the portfolio is 
+\[
+  \gamma = -1,000 \cdot 2.2 - 500 \cdot 0.6 - 2,000 \cdot 1.3 - 500 \cdot 1.8
+\]
+\[
+  \gamma = -2,200 - 300 - 2,600 - 900 = -6,000
+\]
+We aim to get the portfolio to become both gamma and delta neutral. Starting with the gamma part as it is the larger part to first neutralize. As the traded option has gamma of 1.5, we therefore need to long \(6,000 \div 1.5 = \) 4,000 options. With these additional options, the delta of the portfolio then becomes \(-450 + 4,000 \cdot 0.6 = -450 + 2,400 = 1,950\), which we can then neutralize by taking a short position in the underlying itself. So we can do this by \boxed{\textbf{longing 4,000 traded options}} and also \boxed{\textbf{shorting 1,950 sterling}}.
 
 \subsection*{(b)}
 What position in the traded option and in sterling would make the portfolio both vega neutral and delta neutral? \\ \\
-
+The vega of the portfolio is 
+\[
+  \nu = -1,000 \cdot 1.8 - 500 \cdot 0.2 - 2,000 \cdot 0.7 - 500 \cdot 1.4
+\]
+\[
+  \nu = -1,800 - 100 - 1,400 - 700 = -4,000
+\]
+We aim to get the portfolio to become both vega and delta neutral. We tackle vega first as it is also the larger part to neutralize. As the traded option has a vega of 0.8, we therefore need to long \(4,000 \div 0.8 = \) 5,000 options. With these 5,000 options, we now have delta of \(-450 + 5,000 \cdot 0.6 = -450 + 3,000 = 2,550\), which we can neutralize by takinga  short position in the underlying itself. So we achieve the vega and delta neutral portfolio by \boxed{\textbf{longing 5,000 traded options}} and \boxed{\textbf{shorting 2,550 sterling}}.
 
 }
 
